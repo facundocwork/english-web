@@ -3,550 +3,446 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cambridge A2 Key — Mi Temario</title>
+<title>Cambridge A2 Key — Mi Estudio</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #f7f6f2;
-    --bg2: #ffffff;
-    --border: #e4e2da;
-    --text: #1a1a18;
-    --muted: #6b6960;
-    --accent: #2563eb;
-    --accent-light: #eff4ff;
-    --accent-border: #bfcfff;
-    --success: #16a34a;
-    --success-light: #f0fdf4;
-    --success-border: #86efac;
+    --bg: #f7f6f2; --bg2: #ffffff; --border: #e4e2da;
+    --text: #1a1a18; --muted: #6b6960;
+    --accent: #2563eb; --accent-light: #eff4ff; --accent-border: #bfcfff;
+    --success: #16a34a; --success-light: #f0fdf4; --success-border: #86efac;
+    --tag-grammar: #ede9fe; --tag-grammar-t: #5b21b6;
+    --tag-vocab: #fef3c7; --tag-vocab-t: #92400e;
+    --tag-reading: #dbeafe; --tag-reading-t: #1e40af;
+    --tag-writing: #dcfce7; --tag-writing-t: #166534;
+    --tag-listening: #fce7f3; --tag-listening-t: #9d174d;
+    --tag-speaking: #ffedd5; --tag-speaking-t: #9a3412;
     --radius: 10px;
     --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #16161a;
-      --bg2: #1e1e24;
-      --border: #2e2e38;
-      --text: #e8e6df;
-      --muted: #8a8880;
-      --accent: #6b9fff;
-      --accent-light: #1a2240;
-      --accent-border: #2a3f7a;
-      --success: #4ade80;
-      --success-light: #0f2518;
-      --success-border: #166534;
+      --bg: #16161a; --bg2: #1e1e24; --border: #2e2e38;
+      --text: #e8e6df; --muted: #8a8880;
+      --accent: #6b9fff; --accent-light: #1a2240; --accent-border: #2a3f7a;
+      --success: #4ade80; --success-light: #0f2518; --success-border: #166534;
+      --tag-grammar: #2e1f5e; --tag-grammar-t: #c4b5fd;
+      --tag-vocab: #3b2a0a; --tag-vocab-t: #fcd34d;
+      --tag-reading: #1e2f5c; --tag-reading-t: #93c5fd;
+      --tag-writing: #0f2c1a; --tag-writing-t: #86efac;
+      --tag-listening: #3b0f2a; --tag-listening-t: #f9a8d4;
+      --tag-speaking: #3b1a0a; --tag-speaking-t: #fdba74;
     }
   }
 
-  body {
-    font-family: var(--font);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0;
-  }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
 
+  /* ── HEADER ── */
   header {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    padding: 24px 32px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    padding: 16px 28px; position: sticky; top: 0; z-index: 30;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
   }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
+  h1 { font-size: 18px; font-weight: 600; }
 
-  .header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
+  .global-progress { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+  .global-bar-wrap { width: 110px; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .global-bar { height: 6px; background: var(--accent); border-radius: 99px; transition: width .4s; width: 0%; }
+
+  /* ── NAV TABS (Temario / Apuntes) ── */
+  .nav-tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--bg2); padding: 0 28px; }
+  .nav-tab {
+    padding: 12px 20px; font-size: 14px; font-weight: 500; color: var(--muted);
+    border-bottom: 2px solid transparent; cursor: pointer; transition: all .15s; margin-bottom: -1px;
   }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-tab:hover:not(.active) { color: var(--text); }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ══════════════════════════════
+     PÁGINA 1 — TEMARIO
+  ══════════════════════════════ */
+  .temario-wrap { max-width: 740px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  .sec-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
+  .sec-tab {
+    display: flex; align-items: center; gap: 6px; padding: 8px 14px;
+    border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2);
+    font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all .15s;
   }
+  .sec-tab:hover { background: var(--bg); color: var(--text); }
+  .sec-tab.active { background: var(--accent-light); color: var(--accent); border-color: var(--accent-border); }
+  .sec-tab .cnt { font-size: 11px; font-weight: 600; background: var(--border); color: var(--muted); padding: 1px 6px; border-radius: 99px; }
+  .sec-tab.active .cnt { background: var(--accent-border); color: var(--accent); }
 
-  .logo-badge {
-    background: var(--accent);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .04em;
-    padding: 4px 10px;
-    border-radius: 99px;
-    text-transform: uppercase;
-  }
+  .t-section { display: none; }
+  .t-section.active { display: block; }
 
-  h1 {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-  }
-
-  .header-sub {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  .global-progress {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  .global-bar-wrap {
-    width: 120px;
-    height: 6px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
-  .global-bar {
-    height: 6px;
-    background: var(--accent);
-    border-radius: 99px;
-    transition: width .4s ease;
-    width: 0%;
-  }
-
-  .tabs-row {
-    display: flex;
-    gap: 6px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
-
-  .tab {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--bg);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all .15s;
-    user-select: none;
-  }
-
-  .tab:hover { background: var(--bg2); color: var(--text); }
-
-  .tab.active {
-    background: var(--accent-light);
-    color: var(--accent);
-    border-color: var(--accent-border);
-  }
-
-  .tab .tab-count {
-    font-size: 11px;
-    font-weight: 600;
-    background: var(--border);
-    color: var(--muted);
-    padding: 1px 6px;
-    border-radius: 99px;
-    transition: all .15s;
-  }
-
-  .tab.active .tab-count {
-    background: var(--accent-border);
-    color: var(--accent);
-  }
-
-  .tab .tab-done {
-    font-size: 11px;
-    font-weight: 600;
-    background: var(--success-border);
-    color: var(--success);
-    padding: 1px 6px;
-    border-radius: 99px;
-    display: none;
-  }
-
-  main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 32px 20px 60px;
-  }
-
-  .section { display: none; }
-  .section.active { display: block; }
-
-  .section-header {
-    margin-bottom: 20px;
-  }
-
-  .section-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .section-desc {
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 14px;
-  }
-
-  .section-progress-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .sec-bar-bg {
-    flex: 1;
-    height: 7px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
-  .sec-bar {
-    height: 7px;
-    background: var(--accent);
-    border-radius: 99px;
-    transition: width .3s ease;
-    width: 0%;
-  }
-
-  .sec-bar.complete { background: var(--success); }
-
-  .sec-label {
-    font-size: 12px;
-    color: var(--muted);
-    white-space: nowrap;
-    min-width: 110px;
-    text-align: right;
-  }
-
-  .topics-list { margin-top: 16px; }
+  .t-sec-header { margin-bottom: 16px; }
+  .t-sec-title { font-size: 17px; font-weight: 600; margin-bottom: 3px; }
+  .t-sec-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; }
+  .sec-bar-bg { flex: 1; height: 7px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .sec-bar { height: 7px; background: var(--accent); border-radius: 99px; transition: width .3s; }
+  .sec-bar.done { background: var(--success); }
+  .sec-lbl { font-size: 12px; color: var(--muted); white-space: nowrap; min-width: 120px; text-align: right; }
 
   .topic {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--bg2);
-    margin-bottom: 8px;
-    cursor: pointer;
-    transition: border-color .15s, background .15s;
+    display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px;
+    border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2);
+    margin-bottom: 8px; cursor: pointer; transition: border-color .12s, background .12s;
   }
-
   .topic:hover { border-color: var(--accent-border); }
-
-  .topic.done {
-    background: var(--success-light);
-    border-color: var(--success-border);
+  .topic.done { background: var(--success-light); border-color: var(--success-border); }
+  .chk {
+    width: 22px; height: 22px; min-width: 22px; border-radius: 50%; border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    font-size: 12px; color: transparent; transition: all .15s;
   }
-
-  .check {
-    width: 22px;
-    height: 22px;
-    min-width: 22px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1px;
-    transition: all .15s;
-    font-size: 12px;
-    color: transparent;
-  }
-
-  .topic.done .check {
-    background: var(--success);
-    border-color: var(--success);
-    color: #fff;
-  }
-
+  .topic.done .chk { background: var(--success); border-color: var(--success); color: #fff; }
   .topic-body { flex: 1; }
-
-  .topic-name {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
+  .topic-name { font-size: 14px; font-weight: 500; }
   .topic.done .topic-name { color: var(--success); }
+  .topic-detail { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
 
-  .topic-detail {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 3px;
-    line-height: 1.5;
+  .topic-actions { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+  .note-link {
+    font-size: 11px; color: var(--accent); background: var(--accent-light);
+    border: 1px solid var(--accent-border); border-radius: 99px; padding: 2px 9px;
+    cursor: pointer; white-space: nowrap; transition: opacity .12s;
+  }
+  .note-link:hover { opacity: .75; }
+
+  /* ══════════════════════════════
+     PÁGINA 2 — APUNTES
+  ══════════════════════════════ */
+  .apuntes-layout { display: flex; min-height: calc(100vh - 110px); }
+
+  aside {
+    width: 230px; min-width: 230px; border-right: 1px solid var(--border);
+    background: var(--bg2); padding: 16px 12px; overflow-y: auto;
+    position: sticky; top: 110px; height: calc(100vh - 110px);
   }
 
-  .reset-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 24px;
-    padding: 9px 18px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--bg2);
-    color: var(--muted);
-    font-size: 13px;
-    cursor: pointer;
-    transition: all .15s;
+  .new-btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    width: 100%; padding: 9px; border-radius: var(--radius); border: 1px dashed var(--border);
+    background: transparent; color: var(--muted); font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all .15s; margin-bottom: 14px;
   }
+  .new-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
 
-  .reset-btn:hover { border-color: #f87171; color: #ef4444; }
+  .aside-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 0 6px; margin: 12px 0 6px; }
+  .aside-label:first-of-type { margin-top: 0; }
 
-  .completed-banner {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 18px;
-    background: var(--success-light);
-    border: 1px solid var(--success-border);
-    border-radius: var(--radius);
-    margin-bottom: 16px;
-    font-size: 14px;
-    color: var(--success);
-    font-weight: 500;
+  .note-item { padding: 9px 10px; border-radius: 8px; cursor: pointer; margin-bottom: 3px; border: 1px solid transparent; transition: all .12s; }
+  .note-item:hover { background: var(--bg); }
+  .note-item.active { background: var(--accent-light); border-color: var(--accent-border); }
+  .note-item-title { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .note-item.active .note-item-title { color: var(--accent); }
+  .note-item-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .apuntes-main { flex: 1; padding: 28px 28px 60px; max-width: 720px; }
+
+  .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 320px; text-align: center; gap: 12px; }
+  .empty-icon { font-size: 44px; }
+  .empty-title { font-size: 17px; font-weight: 600; }
+  .empty-desc { font-size: 14px; color: var(--muted); max-width: 340px; line-height: 1.6; }
+
+  .note-view { display: none; }
+  .note-view.active { display: block; }
+
+  .note-hdr { margin-bottom: 20px; }
+  .note-hdr-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  .note-title-input {
+    font-size: 21px; font-weight: 600; border: none; background: transparent;
+    color: var(--text); font-family: var(--font); width: 100%; outline: none;
+    border-bottom: 2px solid transparent; padding-bottom: 4px; transition: border-color .15s;
+  }
+  .note-title-input:focus { border-bottom-color: var(--accent); }
+
+  .meta-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 99px; }
+  .tag-grammar  { background: var(--tag-grammar);  color: var(--tag-grammar-t); }
+  .tag-vocab    { background: var(--tag-vocab);    color: var(--tag-vocab-t); }
+  .tag-reading  { background: var(--tag-reading);  color: var(--tag-reading-t); }
+  .tag-writing  { background: var(--tag-writing);  color: var(--tag-writing-t); }
+  .tag-listening{ background: var(--tag-listening);color: var(--tag-listening-t); }
+  .tag-speaking { background: var(--tag-speaking); color: var(--tag-speaking-t); }
+
+  .meta-select {
+    font-size: 12px; font-family: var(--font); border: 1px solid var(--border);
+    background: var(--bg); color: var(--text); padding: 3px 10px; border-radius: 99px; outline: none; cursor: pointer;
+  }
+  .note-date { font-size: 12px; color: var(--muted); }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+
+  .tblock { margin-bottom: 20px; }
+  .tblock h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 7px; }
+  textarea.field {
+    width: 100%; border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--bg); color: var(--text); font-family: var(--font);
+    font-size: 14px; line-height: 1.7; padding: 11px 14px; resize: vertical; outline: none;
+    transition: border-color .15s; min-height: 80px;
+  }
+  textarea.field:focus { border-color: var(--accent); }
+  textarea.field.tall { min-height: 110px; }
+  textarea.field.short { min-height: 56px; }
+  .eg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .eg-box { display: flex; flex-direction: column; gap: 5px; }
+  .eg-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+
+  .act-row { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2); color: var(--text); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .15s; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary:hover { opacity: .88; color: #fff; }
+  .btn-del { color: #ef4444; border-color: #fca5a5; }
+  .btn-del:hover { background: #fef2f2; color: #dc2626; border-color: #ef4444; }
+
+  /* ── MODAL ── */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 100; align-items: center; justify-content: center; }
+  .modal-bg.open { display: flex; }
+  .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 26px; width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 14px; }
+  .modal h2 { font-size: 16px; font-weight: 600; }
+  .modal input, .modal select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; outline: none; }
+  .modal input:focus, .modal select:focus { border-color: var(--accent); }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  @media (max-width: 640px) {
+    aside { display: none; }
+    .apuntes-main { padding: 20px 16px 60px; }
+    .eg-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-top">
-    <div class="logo">
-      <div class="logo-badge">Cambridge</div>
-      <div>
-        <h1>A2 Key — Mi Temario</h1>
-        <div class="header-sub">Marcá los temas que ya aprendiste</div>
-      </div>
-    </div>
-    <div class="global-progress">
-      <div class="global-bar-wrap"><div class="global-bar" id="globalBar"></div></div>
-      <span id="globalLabel">0%</span>
-    </div>
+  <div class="logo">
+    <div class="logo-badge">Cambridge</div>
+    <h1>A2 Key — Mi Estudio</h1>
   </div>
-  <div class="tabs-row" id="tabsRow"></div>
+  <div class="global-progress">
+    <div class="global-bar-wrap"><div class="global-bar" id="globalBar"></div></div>
+    <span id="globalLabel">0%</span>
+  </div>
 </header>
 
-<main id="main"></main>
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="showPage('temario',this)">📋 Temario</div>
+  <div class="nav-tab" onclick="showPage('apuntes',this)">📓 Apuntes</div>
+</div>
+
+<!-- ════ PÁGINA TEMARIO ════ -->
+<div class="page active" id="page-temario">
+  <div class="temario-wrap">
+    <div class="sec-tabs" id="secTabs"></div>
+    <div id="secContent"></div>
+  </div>
+</div>
+
+<!-- ════ PÁGINA APUNTES ════ -->
+<div class="page" id="page-apuntes">
+  <div class="apuntes-layout">
+    <aside>
+      <button class="new-btn" onclick="openModal()">+ Nuevo apunte</button>
+      <div id="noteList"></div>
+    </aside>
+    <div class="apuntes-main" id="apuntesMain">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">📓</div>
+        <div class="empty-title">Todavía no tenés apuntes</div>
+        <div class="empty-desc">Hacé clic en "+ Nuevo apunte" o en "Tomar apunte" desde cualquier tema del temario.</div>
+        <button class="btn btn-primary" style="margin-top:8px" onclick="openModal()">+ Crear primer apunte</button>
+      </div>
+      <div id="noteView" class="note-view"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL ── -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h2>Nuevo apunte</h2>
+    <input type="text" id="newTitle" placeholder="Tema — ej: Presente simple" />
+    <select id="newCategory">
+      <option value="grammar">📝 Gramática</option>
+      <option value="vocab">📚 Vocabulario</option>
+      <option value="reading">👁 Reading</option>
+      <option value="writing">✍️ Writing</option>
+      <option value="listening">👂 Listening</option>
+      <option value="speaking">🗣 Speaking</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="createNote()">Crear</button>
+    </div>
+  </div>
+</div>
 
 <script>
+/* ══════════════════════ DATA ══════════════════════ */
 const SECTIONS = [
-  {
-    id: 'grammar',
-    label: 'Gramática',
-    icon: '📝',
-    desc: 'Los temas gramaticales que aparecen en el examen A2 Key.',
-    topics: [
-      { name: 'Presente simple', detail: 'I work / She works — hábitos y verdades generales' },
-      { name: 'Presente continuo', detail: 'I am working — acciones en progreso ahora mismo' },
-      { name: 'Pasado simple', detail: 'I worked / went — acciones terminadas en el pasado' },
-      { name: 'Futuro con "will"', detail: 'I will help you — predicciones, promesas y decisiones espontáneas' },
-      { name: 'Futuro con "going to"', detail: 'I am going to study — planes e intenciones ya decididas' },
-      { name: 'Preguntas y negaciones', detail: 'Do/Does/Did, am/is/are not, can\'t, don\'t, didn\'t' },
-      { name: 'Artículos: a / an / the', detail: 'A book, an apple, the car — cuándo usar cada uno' },
-      { name: 'Sustantivos contables e incontables', detail: 'Some water / three books — uso de much, many, a lot of' },
-      { name: 'Adjetivos y comparativos', detail: 'big → bigger → biggest / more expensive than / as tall as' },
-      { name: 'Pronombres', detail: 'I/me/my/mine — she/her/hers — they/them/their — reflexivos' },
-      { name: 'Preposiciones de lugar y tiempo', detail: 'in/on/at/under/next to — at 5pm, in June, on Monday' },
-      { name: 'Verbos modales básicos', detail: 'can, could, should, must, have to, would like' },
-      { name: 'Oraciones con "because", "if", "when"', detail: 'I came because you asked. I\'ll leave if you do that.' },
-      { name: 'Imperativo', detail: 'Come here! Don\'t touch that! — órdenes e instrucciones' },
-    ]
-  },
-  {
-    id: 'vocab',
-    label: 'Vocabulario',
-    icon: '📚',
-    desc: 'Áreas temáticas de vocabulario que cubre el examen.',
-    topics: [
-      { name: 'Familia y relaciones', detail: 'mother, brother, friend, neighbour, partner, relative' },
-      { name: 'Casa y hogar', detail: 'bedroom, kitchen, furniture, rent, move in, appliance' },
-      { name: 'Comida y bebida', detail: 'restaurant, menu, ingredients, meal, recipe, taste' },
-      { name: 'Ropa y compras', detail: 'size, price, receipt, try on, sale, fitting room' },
-      { name: 'Trabajo y profesiones', detail: 'office, salary, interview, manager, colleague, CV' },
-      { name: 'Viajes y transporte', detail: 'airport, ticket, platform, delay, passport, boarding' },
-      { name: 'Tiempo libre y deportes', detail: 'hobby, match, team, practice, score, tournament' },
-      { name: 'Salud y cuerpo', detail: 'headache, doctor, medicine, appointment, symptom' },
-      { name: 'Educación', detail: 'lesson, exam, degree, subject, homework, university' },
-      { name: 'Clima y naturaleza', detail: 'sunny, storm, temperature, season, forecast, flood' },
-      { name: 'Tecnología y comunicación', detail: 'email, message, laptop, social media, app, download' },
-      { name: 'Ciudad y lugares', detail: 'museum, library, supermarket, corner, neighbourhood' },
-      { name: 'Números, fechas y hora', detail: 'ordinal numbers, dates, schedules, timetables' },
-      { name: 'Descripción de personas', detail: 'appearance, personality, age, height, character' },
-      { name: 'Entretenimiento y medios', detail: 'film, concert, magazine, review, channel, series' },
-      { name: 'Dinero y finanzas básicas', detail: 'cost, pay, save, afford, change, bill, receipt' },
-    ]
-  },
-  {
-    id: 'reading',
-    label: 'Reading',
-    icon: '👁',
-    desc: 'Comprensión lectora — vale 50% del examen total (junto con Writing).',
-    topics: [
-      { name: 'Part 1 — Textos cortos del mundo real', detail: 'Carteles, mensajes, emails breves, anuncios. Identificar la idea principal.' },
-      { name: 'Part 2 — Opciones múltiples', detail: 'Texto más largo con 5 preguntas de opción múltiple (A/B/C).' },
-      { name: 'Part 3 — Completar oraciones', detail: 'Texto con frases para completar eligiendo la opción correcta entre opciones dadas.' },
-      { name: 'Part 4 — Verdadero / Falso / No dice', detail: 'Preguntas basadas en un artículo — distinguir entre "falso" y "no dice".' },
-      { name: 'Part 5 — Completar texto con palabras', detail: 'Texto con espacios en blanco — elegir la palabra gramaticalmente correcta.' },
-    ]
-  },
-  {
-    id: 'writing',
-    label: 'Writing',
-    icon: '✍️',
-    desc: 'Escritura — incluido en el mismo papel que Reading (50% total).',
-    topics: [
-      { name: 'Part 6 — Email o nota corta', detail: 'Escribir ~25 palabras respondiendo a un email/nota de un amigo o vecino.' },
-      { name: 'Part 7 — Historia corta con fotos', detail: 'Escribir ~35 palabras de una historia basándose en 3 imágenes dadas.' },
-    ]
-  },
-  {
-    id: 'listening',
-    label: 'Listening',
-    icon: '👂',
-    desc: 'Comprensión auditiva — vale 25% del examen total.',
-    topics: [
-      { name: 'Part 1 — Conversaciones cortas + imágenes', detail: 'Escuchar 5 diálogos breves y elegir la imagen correcta (A/B/C).' },
-      { name: 'Part 2 — Completar formulario', detail: 'Escuchar un monólogo y completar información en una tabla o ficha.' },
-      { name: 'Part 3 — Opciones múltiples en diálogo', detail: 'Responder 5 preguntas de opción múltiple basadas en una conversación larga.' },
-      { name: 'Part 4 — Verdadero / Falso en diálogo', detail: '5 afirmaciones para marcar como verdaderas o falsas según una conversación.' },
-      { name: 'Part 5 — Relacionar personas con opciones', detail: 'Relacionar 5 personas o situaciones con opciones de una lista de 8.' },
-    ]
-  },
-  {
-    id: 'speaking',
-    label: 'Speaking',
-    icon: '🗣',
-    desc: 'Expresión oral — presencial con examinador, vale 25% del examen total.',
-    topics: [
-      { name: 'Part 1 — Preguntas personales', detail: 'El examinador pregunta sobre vos: nombre, trabajo, familia, gustos, rutinas diarias.' },
-      { name: 'Part 2 — Descripción y comparación de fotos', detail: 'Describir y comparar dos fotos. Hablar ~1-2 minutos con el otro candidato.' },
-    ]
-  }
+  { id:'grammar', label:'Gramática', icon:'📝', desc:'Temas gramaticales del examen A2 Key.', topics:[
+    {name:'Presente simple', detail:'I work / She works — hábitos y verdades generales'},
+    {name:'Presente continuo', detail:'I am working — acciones en progreso ahora mismo'},
+    {name:'Pasado simple', detail:'I worked / went — acciones terminadas en el pasado'},
+    {name:'Futuro con "will"', detail:'I will help you — predicciones, promesas y decisiones espontáneas'},
+    {name:'Futuro con "going to"', detail:'I am going to study — planes e intenciones ya decididas'},
+    {name:'Preguntas y negaciones', detail:"Do/Does/Did, am/is/are not, can't, don't, didn't"},
+    {name:'Artículos: a / an / the', detail:'A book, an apple, the car — cuándo usar cada uno'},
+    {name:'Sustantivos contables e incontables', detail:'Some water / three books — uso de much, many, a lot of'},
+    {name:'Adjetivos y comparativos', detail:'big → bigger → biggest / more expensive than / as tall as'},
+    {name:'Pronombres', detail:'I/me/my/mine — she/her/hers — they/them/their — reflexivos'},
+    {name:'Preposiciones de lugar y tiempo', detail:'in/on/at/under/next to — at 5pm, in June, on Monday'},
+    {name:'Verbos modales básicos', detail:'can, could, should, must, have to, would like'},
+    {name:'Oraciones con "because", "if", "when"', detail:"I came because you asked. I'll leave if you do that."},
+    {name:'Imperativo', detail:"Come here! Don't touch that! — órdenes e instrucciones"},
+  ]},
+  { id:'vocab', label:'Vocabulario', icon:'📚', desc:'Áreas temáticas de vocabulario del examen.', topics:[
+    {name:'Familia y relaciones', detail:'mother, brother, friend, neighbour, partner, relative'},
+    {name:'Casa y hogar', detail:'bedroom, kitchen, furniture, rent, move in, appliance'},
+    {name:'Comida y bebida', detail:'restaurant, menu, ingredients, meal, recipe, taste'},
+    {name:'Ropa y compras', detail:'size, price, receipt, try on, sale, fitting room'},
+    {name:'Trabajo y profesiones', detail:'office, salary, interview, manager, colleague, CV'},
+    {name:'Viajes y transporte', detail:'airport, ticket, platform, delay, passport, boarding'},
+    {name:'Tiempo libre y deportes', detail:'hobby, match, team, practice, score, tournament'},
+    {name:'Salud y cuerpo', detail:'headache, doctor, medicine, appointment, symptom'},
+    {name:'Educación', detail:'lesson, exam, degree, subject, homework, university'},
+    {name:'Clima y naturaleza', detail:'sunny, storm, temperature, season, forecast, flood'},
+    {name:'Tecnología y comunicación', detail:'email, message, laptop, social media, app, download'},
+    {name:'Ciudad y lugares', detail:'museum, library, supermarket, corner, neighbourhood'},
+    {name:'Números, fechas y hora', detail:'ordinal numbers, dates, schedules, timetables'},
+    {name:'Descripción de personas', detail:'appearance, personality, age, height, character'},
+    {name:'Entretenimiento y medios', detail:'film, concert, magazine, review, channel, series'},
+    {name:'Dinero y finanzas básicas', detail:'cost, pay, save, afford, change, bill, receipt'},
+  ]},
+  { id:'reading', label:'Reading', icon:'👁', desc:'Comprensión lectora — vale 50% del examen (junto con Writing).', topics:[
+    {name:'Part 1 — Textos cortos del mundo real', detail:'Carteles, mensajes, emails breves. Identificar la idea principal.'},
+    {name:'Part 2 — Opciones múltiples', detail:'Texto más largo con 5 preguntas de opción múltiple (A/B/C).'},
+    {name:'Part 3 — Completar oraciones', detail:'Texto con frases para completar eligiendo la opción correcta.'},
+    {name:'Part 4 — Verdadero / Falso / No dice', detail:'Distinguir entre "falso" y "no dice" en base a un artículo.'},
+    {name:'Part 5 — Completar texto con palabras', detail:'Texto con espacios en blanco — elegir la palabra correcta.'},
+  ]},
+  { id:'writing', label:'Writing', icon:'✍️', desc:'Escritura — mismo papel que Reading (50% total).', topics:[
+    {name:'Part 6 — Email o nota corta', detail:'~25 palabras respondiendo a un email o nota de un amigo.'},
+    {name:'Part 7 — Historia corta con fotos', detail:'~35 palabras de historia basándose en 3 imágenes dadas.'},
+  ]},
+  { id:'listening', label:'Listening', icon:'👂', desc:'Comprensión auditiva — 25% del examen total.', topics:[
+    {name:'Part 1 — Conversaciones cortas + imágenes', detail:'5 diálogos breves, elegir la imagen correcta (A/B/C).'},
+    {name:'Part 2 — Completar formulario', detail:'Escuchar un monólogo y completar una tabla o ficha.'},
+    {name:'Part 3 — Opciones múltiples en diálogo', detail:'5 preguntas de opción múltiple sobre una conversación larga.'},
+    {name:'Part 4 — Verdadero / Falso en diálogo', detail:'5 afirmaciones para marcar como verdaderas o falsas.'},
+    {name:'Part 5 — Relacionar personas con opciones', detail:'Relacionar 5 personas o situaciones con opciones de una lista.'},
+  ]},
+  { id:'speaking', label:'Speaking', icon:'🗣', desc:'Expresión oral presencial — 25% del examen total.', topics:[
+    {name:'Part 1 — Preguntas personales', detail:'El examinador pregunta sobre vos: nombre, trabajo, familia, gustos.'},
+    {name:'Part 2 — Descripción y comparación de fotos', detail:'Describir y comparar dos fotos durante ~1-2 minutos.'},
+  ]},
 ];
 
-const STORAGE_KEY = 'cambridge_a2_progress';
+const CATS = {
+  grammar:'Gramática', vocab:'Vocabulario', reading:'Reading',
+  writing:'Writing', listening:'Listening', speaking:'Speaking'
+};
+const ICONS = {grammar:'📝',vocab:'📚',reading:'👁',writing:'✍️',listening:'👂',speaking:'🗣'};
 
-function loadState() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-  } catch(e) { return {}; }
-}
+const T_KEY = 'cambridge_a2_progress';
+const N_KEY = 'ingles_apuntes_v1';
 
-function saveState(state) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-
-let state = loadState();
+let tState = (() => { try { return JSON.parse(localStorage.getItem(T_KEY)) || {}; } catch(e){return{};} })();
+let notes  = (() => { try { return JSON.parse(localStorage.getItem(N_KEY))  || []; } catch(e){return[];} })();
 let activeSection = SECTIONS[0].id;
+let activeNoteId  = null;
+let prefilledTitle = '';
+let prefilledCat   = 'grammar';
 
-function getProgress(sectionId) {
-  const sec = SECTIONS.find(s => s.id === sectionId);
-  const done = (state[sectionId] || []).length;
-  return { done, total: sec.topics.length, pct: Math.round(done / sec.topics.length * 100) };
+function saveT() { localStorage.setItem(T_KEY, JSON.stringify(tState)); }
+function saveN() { localStorage.setItem(N_KEY, JSON.stringify(notes)); }
+
+/* ══════════════════════ PAGE NAV ══════════════════════ */
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  el.classList.add('active');
 }
 
-function getTotalProgress() {
-  let done = 0, total = 0;
-  SECTIONS.forEach(s => {
-    const p = getProgress(s.id);
-    done += p.done; total += p.total;
-  });
-  return Math.round(done / total * 100);
+/* ══════════════════════ TEMARIO ══════════════════════ */
+function isDone(sid, i) { return (tState[sid]||[]).includes(i); }
+
+function toggleTopic(sid, i) {
+  if (!tState[sid]) tState[sid] = [];
+  const idx = tState[sid].indexOf(i);
+  if (idx === -1) tState[sid].push(i); else tState[sid].splice(idx,1);
+  saveT(); renderTemario(); renderGlobal();
 }
 
-function isDone(sectionId, i) {
-  return (state[sectionId] || []).includes(i);
+function getProgress(sid) {
+  const sec = SECTIONS.find(s=>s.id===sid);
+  const done = (tState[sid]||[]).length;
+  return { done, total: sec.topics.length, pct: Math.round(done/sec.topics.length*100) };
 }
 
-function toggleTopic(sectionId, i) {
-  if (!state[sectionId]) state[sectionId] = [];
-  const idx = state[sectionId].indexOf(i);
-  if (idx === -1) state[sectionId].push(i);
-  else state[sectionId].splice(idx, 1);
-  saveState(state);
-  render();
-}
-
-function resetSection(sectionId) {
-  if (confirm('¿Resetear todos los temas de esta sección?')) {
-    state[sectionId] = [];
-    saveState(state);
-    render();
-  }
-}
-
-function showTab(id) {
-  activeSection = id;
-  render();
-}
-
-function render() {
-  renderTabs();
-  renderMain();
-  renderGlobal();
-}
-
-function renderTabs() {
-  const row = document.getElementById('tabsRow');
-  row.innerHTML = '';
+function renderTemario() {
+  // tabs
+  const tabs = document.getElementById('secTabs');
+  tabs.innerHTML = '';
   SECTIONS.forEach(sec => {
     const p = getProgress(sec.id);
     const btn = document.createElement('button');
-    btn.className = 'tab' + (activeSection === sec.id ? ' active' : '');
-    btn.innerHTML = `<span>${sec.icon} ${sec.label}</span><span class="tab-count">${p.done}/${p.total}</span>`;
-    btn.onclick = () => showTab(sec.id);
-    row.appendChild(btn);
+    btn.className = 'sec-tab' + (activeSection===sec.id?' active':'');
+    btn.innerHTML = `${sec.icon} ${sec.label} <span class="cnt">${p.done}/${p.total}</span>`;
+    btn.onclick = () => { activeSection = sec.id; renderTemario(); };
+    tabs.appendChild(btn);
   });
-}
 
-function renderMain() {
-  const main = document.getElementById('main');
-  main.innerHTML = '';
+  // content
+  const cont = document.getElementById('secContent');
+  cont.innerHTML = '';
   SECTIONS.forEach(sec => {
     const p = getProgress(sec.id);
     const div = document.createElement('div');
-    div.className = 'section' + (activeSection === sec.id ? ' active' : '');
-    div.id = 'sec-' + sec.id;
-
-    const banner = p.done === p.total
-      ? `<div class="completed-banner" style="display:flex">🎉 ¡Completaste todos los temas de esta sección!</div>`
-      : '';
+    div.className = 't-section' + (activeSection===sec.id?' active':'');
 
     div.innerHTML = `
-      <div class="section-header">
-        <div class="section-title">${sec.icon} ${sec.label}</div>
-        <div class="section-desc">${sec.desc}</div>
-        ${banner}
-        <div class="section-progress-wrap">
-          <div class="sec-bar-bg"><div class="sec-bar${p.done===p.total?' complete':''}" style="width:${p.pct}%"></div></div>
-          <div class="sec-label">${p.done} de ${p.total} completados</div>
+      <div class="t-sec-header">
+        <div class="t-sec-title">${sec.icon} ${sec.label}</div>
+        <div class="t-sec-desc">${sec.desc}</div>
+        <div class="progress-row">
+          <div class="sec-bar-bg"><div class="sec-bar${p.done===p.total?' done':''}" style="width:${p.pct}%"></div></div>
+          <div class="sec-lbl">${p.done} de ${p.total} completados</div>
         </div>
       </div>
-      <div class="topics-list" id="tl-${sec.id}"></div>
-      <button class="reset-btn" onclick="resetSection('${sec.id}')">↺ Resetear sección</button>
+      <div id="tl-${sec.id}"></div>
     `;
-    main.appendChild(div);
+    cont.appendChild(div);
 
-    const list = div.querySelector('#tl-' + sec.id);
+    const list = div.querySelector('#tl-'+sec.id);
     sec.topics.forEach((t, i) => {
       const d = document.createElement('div');
-      d.className = 'topic' + (isDone(sec.id, i) ? ' done' : '');
-      d.innerHTML = `<div class="check">${isDone(sec.id, i) ? '✓' : ''}</div><div class="topic-body"><div class="topic-name">${t.name}</div><div class="topic-detail">${t.detail}</div></div>`;
+      d.className = 'topic' + (isDone(sec.id,i)?' done':'');
+      const hasNote = notes.some(n => n.title === t.name && n.category === sec.id);
+      d.innerHTML = `
+        <div class="chk">${isDone(sec.id,i)?'✓':''}</div>
+        <div class="topic-body">
+          <div class="topic-name">${t.name}</div>
+          <div class="topic-detail">${t.detail}</div>
+        </div>
+        <div class="topic-actions">
+          <span class="note-link" onclick="event.stopPropagation();goToNote('${esc(t.name)}','${sec.id}')">
+            ${hasNote ? '📓 Ver apunte' : '+ Tomar apunte'}
+          </span>
+        </div>
+      `;
       d.onclick = () => toggleTopic(sec.id, i);
       list.appendChild(d);
     });
@@ -554,12 +450,172 @@ function renderMain() {
 }
 
 function renderGlobal() {
-  const pct = getTotalProgress();
-  document.getElementById('globalBar').style.width = pct + '%';
-  document.getElementById('globalLabel').textContent = pct + '%';
+  let done=0, total=0;
+  SECTIONS.forEach(s => { const p=getProgress(s.id); done+=p.done; total+=p.total; });
+  const pct = Math.round(done/total*100);
+  document.getElementById('globalBar').style.width = pct+'%';
+  document.getElementById('globalLabel').textContent = pct+'%';
 }
 
-render();
+/* ══════════════════════ APUNTES ══════════════════════ */
+function goToNote(title, cat) {
+  const existing = notes.find(n => n.title===title && n.category===cat);
+  if (existing) {
+    activeNoteId = existing.id;
+  } else {
+    prefilledTitle = title; prefilledCat = cat;
+    openModal();
+    return;
+  }
+  // switch to apuntes page
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-apuntes').classList.add('active');
+  document.querySelectorAll('.nav-tab')[1].classList.add('active');
+  renderApuntes();
+}
+
+function openModal(title='', cat='grammar') {
+  document.getElementById('newTitle').value = prefilledTitle || title;
+  document.getElementById('newCategory').value = prefilledCat || cat;
+  document.getElementById('modalBg').classList.add('open');
+  setTimeout(()=>document.getElementById('newTitle').focus(), 50);
+}
+
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+  document.getElementById('newTitle').value = '';
+  prefilledTitle = ''; prefilledCat = 'grammar';
+}
+
+document.getElementById('modalBg').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+document.getElementById('newTitle').addEventListener('keydown', e => { if(e.key==='Enter') createNote(); });
+
+function createNote() {
+  const title = document.getElementById('newTitle').value.trim();
+  const cat   = document.getElementById('newCategory').value;
+  if (!title) { document.getElementById('newTitle').focus(); return; }
+  const note = { id: Date.now().toString(), title, category: cat, date: new Date().toLocaleDateString('es-AR'),
+    explicacion:'', estructura:'', ejemplo_correcto:'', ejemplo_incorrecto:'', vocabulario:'', errores:'', notas:'' };
+  notes.unshift(note);
+  saveN();
+  activeNoteId = note.id;
+  closeModal();
+  // switch to apuntes
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-apuntes').classList.add('active');
+  document.querySelectorAll('.nav-tab')[1].classList.add('active');
+  renderApuntes();
+}
+
+function deleteNote(id) {
+  if (!confirm('¿Borrar este apunte?')) return;
+  notes = notes.filter(n=>n.id!==id);
+  activeNoteId = null; saveN(); renderApuntes();
+}
+
+function updateField(id, field, value) {
+  const note = notes.find(n=>n.id===id);
+  if (note) { note[field]=value; saveN(); renderNoteList(); renderTemario(); }
+}
+
+function renderNoteList() {
+  const list = document.getElementById('noteList');
+  if (!notes.length) { list.innerHTML='<div style="font-size:13px;color:var(--muted);padding:6px">Sin apuntes aún.</div>'; return; }
+  const groups = {};
+  notes.forEach(n => { if(!groups[n.category]) groups[n.category]=[]; groups[n.category].push(n); });
+  let html = '';
+  Object.entries(CATS).forEach(([key, label]) => {
+    if (!groups[key]) return;
+    html += `<div class="aside-label">${ICONS[key]} ${label}</div>`;
+    groups[key].forEach(n => {
+      html += `<div class="note-item${activeNoteId===n.id?' active':''}" onclick="activeNoteId='${n.id}';renderApuntes()">
+        <div class="note-item-title">${escHtml(n.title)}</div>
+        <div class="note-item-meta">${n.date}</div>
+      </div>`;
+    });
+  });
+  list.innerHTML = html;
+}
+
+function renderNoteView() {
+  const view  = document.getElementById('noteView');
+  const empty = document.getElementById('emptyState');
+  const note  = notes.find(n=>n.id===activeNoteId);
+  if (!note) { view.classList.remove('active'); empty.style.display=''; return; }
+  empty.style.display = 'none';
+  view.classList.add('active');
+  view.innerHTML = `
+    <div class="note-hdr">
+      <div class="note-hdr-top">
+        <input class="note-title-input" value="${escHtml(note.title)}" placeholder="Título"
+          onchange="updateField('${note.id}','title',this.value)">
+      </div>
+      <div class="meta-row">
+        <span class="tag tag-${note.category}">${ICONS[note.category]} ${CATS[note.category]}</span>
+        <select class="meta-select" onchange="updateField('${note.id}','category',this.value);renderApuntes()">
+          ${Object.entries(CATS).map(([k,v])=>`<option value="${k}"${note.category===k?' selected':''}>${ICONS[k]} ${v}</option>`).join('')}
+        </select>
+        <span class="note-date">📅 ${note.date}</span>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="tblock">
+      <h3>📖 ¿Qué es? — Explicación</h3>
+      <textarea class="field tall" placeholder="Explicá el tema con tus propias palabras. ¿Para qué se usa? ¿Cuándo se aplica?"
+        onchange="updateField('${note.id}','explicacion',this.value)">${escHtml(note.explicacion)}</textarea>
+    </div>
+    <div class="tblock">
+      <h3>🔧 Estructura / Regla</h3>
+      <textarea class="field" placeholder="Ej: Sujeto + verbo + complemento  /  She works every day."
+        onchange="updateField('${note.id}','estructura',this.value)">${escHtml(note.estructura)}</textarea>
+    </div>
+    <div class="tblock">
+      <h3>💬 Ejemplos</h3>
+      <div class="eg-grid">
+        <div class="eg-box">
+          <div class="eg-label">✅ Correcto</div>
+          <textarea class="field tall" placeholder="She works at a hospital.&#10;They are studying English."
+            onchange="updateField('${note.id}','ejemplo_correcto',this.value)">${escHtml(note.ejemplo_correcto)}</textarea>
+        </div>
+        <div class="eg-box">
+          <div class="eg-label">❌ Errores comunes</div>
+          <textarea class="field tall" placeholder="She work at a hospital.&#10;They is studying English."
+            onchange="updateField('${note.id}','ejemplo_incorrecto',this.value)">${escHtml(note.ejemplo_incorrecto)}</textarea>
+        </div>
+      </div>
+    </div>
+    <div class="tblock">
+      <h3>📝 Vocabulario relacionado</h3>
+      <textarea class="field" placeholder="always, usually, sometimes, never, every day, on weekdays..."
+        onchange="updateField('${note.id}','vocabulario',this.value)">${escHtml(note.vocabulario)}</textarea>
+    </div>
+    <div class="tblock">
+      <h3>⚠️ Mis errores frecuentes</h3>
+      <textarea class="field short" placeholder="Anotá los errores que cometés seguido para no repetirlos."
+        onchange="updateField('${note.id}','errores',this.value)">${escHtml(note.errores)}</textarea>
+    </div>
+    <div class="tblock">
+      <h3>💡 Notas extra / Trucos para recordar</h3>
+      <textarea class="field short" placeholder="Excepciones, comparaciones con el español, trucos mnemotécnicos..."
+        onchange="updateField('${note.id}','notas',this.value)">${escHtml(note.notas)}</textarea>
+    </div>
+    <div class="act-row">
+      <button class="btn btn-del" onclick="deleteNote('${note.id}')">🗑 Borrar apunte</button>
+    </div>
+  `;
+}
+
+function renderApuntes() { renderNoteList(); renderNoteView(); }
+
+function esc(s) { return (s||'').replace(/'/g,"\\'"); }
+function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ══════════════════════ INIT ══════════════════════ */
+renderTemario();
+renderGlobal();
+renderApuntes();
 </script>
 </body>
 </html>
