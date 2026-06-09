@@ -1,473 +1,1069 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cambridge A2 Key — Mi Estudio</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #f7f6f2; --bg2: #ffffff; --border: #e4e2da;
-    --text: #1a1a18; --muted: #6b6960;
-    --accent: #2563eb; --accent-light: #eff4ff; --accent-border: #bfcfff;
-    --success: #16a34a; --success-light: #f0fdf4; --success-border: #86efac;
-    --tag-grammar: #ede9fe; --tag-grammar-t: #5b21b6;
-    --tag-vocab: #fef3c7; --tag-vocab-t: #92400e;
-    --tag-reading: #dbeafe; --tag-reading-t: #1e40af;
-    --tag-writing: #dcfce7; --tag-writing-t: #166534;
-    --tag-listening: #fce7f3; --tag-listening-t: #9d174d;
-    --tag-speaking: #ffedd5; --tag-speaking-t: #9a3412;
-    --radius: 10px;
-    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #16161a; --bg2: #1e1e24; --border: #2e2e38;
-      --text: #e8e6df; --muted: #8a8880;
-      --accent: #6b9fff; --accent-light: #1a2240; --accent-border: #2a3f7a;
-      --success: #4ade80; --success-light: #0f2518; --success-border: #166534;
-      --tag-grammar: #2e1f5e; --tag-grammar-t: #c4b5fd;
-      --tag-vocab: #3b2a0a; --tag-vocab-t: #fcd34d;
-      --tag-reading: #1e2f5c; --tag-reading-t: #93c5fd;
-      --tag-writing: #0f2c1a; --tag-writing-t: #86efac;
-      --tag-listening: #3b0f2a; --tag-listening-t: #f9a8d4;
-      --tag-speaking: #3b1a0a; --tag-speaking-t: #fdba74;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambridge A2 Key — Mi Estudio</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-  }
 
-  body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
+    :root {
+      --bg: #f7f6f2;
+      --bg2: #ffffff;
+      --border: #e4e2da;
+      --text: #1a1a18;
+      --muted: #6b6960;
+      --accent: #2563eb;
+      --accent-light: #eff4ff;
+      --accent-border: #bfcfff;
+      --success: #16a34a;
+      --success-light: #f0fdf4;
+      --success-border: #86efac;
+      --tag-grammar: #ede9fe;
+      --tag-grammar-t: #5b21b6;
+      --tag-vocab: #fef3c7;
+      --tag-vocab-t: #92400e;
+      --tag-reading: #dbeafe;
+      --tag-reading-t: #1e40af;
+      --tag-writing: #dcfce7;
+      --tag-writing-t: #166534;
+      --tag-listening: #fce7f3;
+      --tag-listening-t: #9d174d;
+      --tag-speaking: #ffedd5;
+      --tag-speaking-t: #9a3412;
+      --radius: 10px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
 
-  /* ── HEADER ── */
-  header {
-    background: var(--bg2); border-bottom: 1px solid var(--border);
-    padding: 16px 28px; position: sticky; top: 0; z-index: 30;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-  }
-  .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
-  h1 { font-size: 18px; font-weight: 600; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #16161a;
+        --bg2: #1e1e24;
+        --border: #2e2e38;
+        --text: #e8e6df;
+        --muted: #8a8880;
+        --accent: #6b9fff;
+        --accent-light: #1a2240;
+        --accent-border: #2a3f7a;
+        --success: #4ade80;
+        --success-light: #0f2518;
+        --success-border: #166534;
+        --tag-grammar: #2e1f5e;
+        --tag-grammar-t: #c4b5fd;
+        --tag-vocab: #3b2a0a;
+        --tag-vocab-t: #fcd34d;
+        --tag-reading: #1e2f5c;
+        --tag-reading-t: #93c5fd;
+        --tag-writing: #0f2c1a;
+        --tag-writing-t: #86efac;
+        --tag-listening: #3b0f2a;
+        --tag-listening-t: #f9a8d4;
+        --tag-speaking: #3b1a0a;
+        --tag-speaking-t: #fdba74;
+      }
+    }
 
-  .global-progress { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
-  .global-bar-wrap { width: 110px; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
-  .global-bar { height: 6px; background: var(--accent); border-radius: 99px; transition: width .4s; width: 0%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-  /* ── NAV TABS (Temario / Apuntes) ── */
-  .nav-tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--bg2); padding: 0 28px; }
-  .nav-tab {
-    padding: 12px 20px; font-size: 14px; font-weight: 500; color: var(--muted);
-    border-bottom: 2px solid transparent; cursor: pointer; transition: all .15s; margin-bottom: -1px;
-  }
-  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .nav-tab:hover:not(.active) { color: var(--text); }
+    /* ── HEADER ── */
+    header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-  /* ── PAGES ── */
-  .page { display: none; }
-  .page.active { display: block; }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  /* ══════════════════════════════
+    .logo-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .global-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .global-bar-wrap {
+      width: 110px;
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .global-bar {
+      height: 6px;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width .4s;
+      width: 0%;
+    }
+
+    /* ── NAV TABS (Temario / Apuntes) ── */
+    .nav-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 0 28px;
+    }
+
+    .nav-tab {
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all .15s;
+      margin-bottom: -1px;
+    }
+
+    .nav-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .nav-tab:hover:not(.active) {
+      color: var(--text);
+    }
+
+    /* ── PAGES ── */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* ══════════════════════════════
      PÁGINA 1 — TEMARIO
   ══════════════════════════════ */
-  .temario-wrap { max-width: 740px; margin: 0 auto; padding: 28px 20px 60px; }
+    .temario-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
 
-  .sec-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
-  .sec-tab {
-    display: flex; align-items: center; gap: 6px; padding: 8px 14px;
-    border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2);
-    font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all .15s;
-  }
-  .sec-tab:hover { background: var(--bg); color: var(--text); }
-  .sec-tab.active { background: var(--accent-light); color: var(--accent); border-color: var(--accent-border); }
-  .sec-tab .cnt { font-size: 11px; font-weight: 600; background: var(--border); color: var(--muted); padding: 1px 6px; border-radius: 99px; }
-  .sec-tab.active .cnt { background: var(--accent-border); color: var(--accent); }
+    .sec-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
 
-  .t-section { display: none; }
-  .t-section.active { display: block; }
+    .sec-tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
 
-  .t-sec-header { margin-bottom: 16px; }
-  .t-sec-title { font-size: 17px; font-weight: 600; margin-bottom: 3px; }
-  .t-sec-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
-  .progress-row { display: flex; align-items: center; gap: 12px; }
-  .sec-bar-bg { flex: 1; height: 7px; background: var(--border); border-radius: 99px; overflow: hidden; }
-  .sec-bar { height: 7px; background: var(--accent); border-radius: 99px; transition: width .3s; }
-  .sec-bar.done { background: var(--success); }
-  .sec-lbl { font-size: 12px; color: var(--muted); white-space: nowrap; min-width: 120px; text-align: right; }
+    .sec-tab:hover {
+      background: var(--bg);
+      color: var(--text);
+    }
 
-  .topic {
-    display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px;
-    border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2);
-    margin-bottom: 8px; cursor: pointer; transition: border-color .12s, background .12s;
-  }
-  .topic:hover { border-color: var(--accent-border); }
-  .topic.done { background: var(--success-light); border-color: var(--success-border); }
-  .chk {
-    width: 22px; height: 22px; min-width: 22px; border-radius: 50%; border: 2px solid var(--border);
-    display: flex; align-items: center; justify-content: center; margin-top: 1px;
-    font-size: 12px; color: transparent; transition: all .15s;
-  }
-  .topic.done .chk { background: var(--success); border-color: var(--success); color: #fff; }
-  .topic-body { flex: 1; }
-  .topic-name { font-size: 14px; font-weight: 500; }
-  .topic.done .topic-name { color: var(--success); }
-  .topic-detail { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+    .sec-tab.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: var(--accent-border);
+    }
 
-  .topic-actions { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
-  .note-link {
-    font-size: 11px; color: var(--accent); background: var(--accent-light);
-    border: 1px solid var(--accent-border); border-radius: 99px; padding: 2px 9px;
-    cursor: pointer; white-space: nowrap; transition: opacity .12s;
-  }
-  .note-link:hover { opacity: .75; }
+    .sec-tab .cnt {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--border);
+      color: var(--muted);
+      padding: 1px 6px;
+      border-radius: 99px;
+    }
 
-  /* ══════════════════════════════
+    .sec-tab.active .cnt {
+      background: var(--accent-border);
+      color: var(--accent);
+    }
+
+    .t-section {
+      display: none;
+    }
+
+    .t-section.active {
+      display: block;
+    }
+
+    .t-sec-header {
+      margin-bottom: 16px;
+    }
+
+    .t-sec-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .t-sec-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sec-bar-bg {
+      flex: 1;
+      height: 7px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .sec-bar {
+      height: 7px;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width .3s;
+    }
+
+    .sec-bar.done {
+      background: var(--success);
+    }
+
+    .sec-lbl {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      min-width: 120px;
+      text-align: right;
+    }
+
+    .topic {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: border-color .12s, background .12s;
+    }
+
+    .topic:hover {
+      border-color: var(--accent-border);
+    }
+
+    .topic.done {
+      background: var(--success-light);
+      border-color: var(--success-border);
+    }
+
+    .chk {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      font-size: 12px;
+      color: transparent;
+      transition: all .15s;
+    }
+
+    .topic.done .chk {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+    }
+
+    .topic-body {
+      flex: 1;
+    }
+
+    .topic-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .topic.done .topic-name {
+      color: var(--success);
+    }
+
+    .topic-detail {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    .topic-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+    }
+
+    .note-link {
+      font-size: 11px;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid var(--accent-border);
+      border-radius: 99px;
+      padding: 2px 9px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity .12s;
+    }
+
+    .note-link:hover {
+      opacity: .75;
+    }
+
+    /* ══════════════════════════════
      PÁGINA 2 — APUNTES
   ══════════════════════════════ */
-  .apuntes-layout { display: flex; min-height: calc(100vh - 110px); }
+    .apuntes-layout {
+      display: flex;
+      min-height: calc(100vh - 110px);
+    }
 
-  aside {
-    width: 230px; min-width: 230px; border-right: 1px solid var(--border);
-    background: var(--bg2); padding: 16px 12px;
-  }
+    aside {
+      width: 230px;
+      min-width: 230px;
+      border-right: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 16px 12px;
+    }
 
-  /* Toolbar for rich text editing */
-  .toolbar {
-    display: flex; gap: 4px; margin-bottom: 4px;
-  }
-  .toolbar button {
-    background: var(--bg2); color: var(--text); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 2px 6px; cursor: pointer;
-    font-size: 12px;
-  }
-  .toolbar button:hover {
-  background: var(--accent-light); color: var(--accent);
-}
+    /* Toolbar for rich text editing */
+    .toolbar {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
 
-/* Dark‑mode styling for the font‑size select inside the toolbar */
-.toolbar select {
-  background: var(--bg2);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2px 4px;
-  font-size: 12px;
-  -webkit-appearance: none;
-  appearance: none;
-}
-.toolbar select option {
-  background: var(--bg2);
-  color: var(--text);
-}
+    .toolbar button {
+      background: var(--bg2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2px 6px;
+      cursor: pointer;
+      font-size: 12px;
+    }
 
-  .rich-editor {
-    min-height: 80px; border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--bg); color: var(--text); padding: 6px 8px; font-family: var(--font); font-size: 14px;
-    overflow-y: auto;
-  }
-  .rich-editor:focus { outline: none; border-color: var(--accent); }
+    .toolbar button:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
 
-  .new-btn {
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-    width: 100%; padding: 9px; border-radius: var(--radius); border: 1px dashed var(--border);
-    background: transparent; color: var(--muted); font-size: 13px; font-weight: 500;
-    cursor: pointer; transition: all .15s; margin-bottom: 14px;
-  }
-  .new-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    /* Dark‑mode styling for the font‑size select inside the toolbar */
+    .toolbar select {
+      background: var(--bg2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2px 4px;
+      font-size: 12px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
 
-  .aside-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 0 6px; margin: 12px 0 6px; }
-  .aside-label:first-of-type { margin-top: 0; }
+    .toolbar select option {
+      background: var(--bg2);
+      color: var(--text);
+    }
 
-  .note-item { padding: 9px 10px; border-radius: 8px; cursor: pointer; margin-bottom: 3px; border: 1px solid transparent; transition: all .12s; }
-  .note-item:hover { background: var(--bg); }
-  .note-item.active { background: var(--accent-light); border-color: var(--accent-border); }
-  .note-item-title { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .note-item.active .note-item-title { color: var(--accent); }
-  .note-item-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .rich-editor {
+      min-height: 80px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+      padding: 6px 8px;
+      font-family: var(--font);
+      font-size: 14px;
+      overflow-y: auto;
+    }
 
-  .apuntes-main { flex: 1; padding: 28px 28px 60px; max-width: 720px; }
+    .rich-editor:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
 
-  .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 320px; text-align: center; gap: 12px; }
-  .empty-icon { font-size: 44px; }
-  .empty-title { font-size: 17px; font-weight: 600; }
-  .empty-desc { font-size: 14px; color: var(--muted); max-width: 340px; line-height: 1.6; }
+    .new-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 9px;
+      border-radius: var(--radius);
+      border: 1px dashed var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      margin-bottom: 14px;
+    }
 
-  .note-view { display: none; }
-  .note-view.active { display: block; }
+    .new-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-light);
+    }
 
-  .note-hdr { margin-bottom: 20px; }
-  .note-hdr-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
-  .note-title-input {
-    font-size: 21px; font-weight: 600; border: none; background: transparent;
-    color: var(--text); font-family: var(--font); width: 100%; outline: none;
-    border-bottom: 2px solid transparent; padding-bottom: 4px; transition: border-color .15s;
-  }
-  .note-title-input:focus { border-bottom-color: var(--accent); }
+    .aside-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      padding: 0 6px;
+      margin: 12px 0 6px;
+    }
 
-  .meta-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 99px; }
-  .tag-grammar  { background: var(--tag-grammar);  color: var(--tag-grammar-t); }
-  .tag-vocab    { background: var(--tag-vocab);    color: var(--tag-vocab-t); }
-  .tag-reading  { background: var(--tag-reading);  color: var(--tag-reading-t); }
-  .tag-writing  { background: var(--tag-writing);  color: var(--tag-writing-t); }
-  .tag-listening{ background: var(--tag-listening);color: var(--tag-listening-t); }
-  .tag-speaking { background: var(--tag-speaking); color: var(--tag-speaking-t); }
+    .aside-label:first-of-type {
+      margin-top: 0;
+    }
 
-  .meta-select {
-    font-size: 12px; font-family: var(--font); border: 1px solid var(--border);
-    background: var(--bg); color: var(--text); padding: 3px 10px; border-radius: 99px; outline: none; cursor: pointer;
-  }
-  .note-date { font-size: 12px; color: var(--muted); }
-  .divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+    .note-item {
+      padding: 9px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 3px;
+      border: 1px solid transparent;
+      transition: all .12s;
+    }
 
-  .tblock { margin-bottom: 20px; }
-  .tblock h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 7px; }
-  textarea.field {
-    width: 100%; border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--bg); color: var(--text); font-family: var(--font);
-    font-size: 14px; line-height: 1.7; padding: 11px 14px; resize: vertical; outline: none;
-    transition: border-color .15s; min-height: 80px;
-  }
-  textarea.field:focus { border-color: var(--accent); }
-  textarea.field.tall { min-height: 110px; }
-  textarea.field.short { min-height: 56px; }
-  .eg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .eg-box { display: flex; flex-direction: column; gap: 5px; }
-  .eg-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    .note-item:hover {
+      background: var(--bg);
+    }
 
-  .act-row { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
-  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2); color: var(--text); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .15s; }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .btn-primary:hover { opacity: .88; color: #fff; }
-  .btn-del { color: #ef4444; border-color: #fca5a5; }
-  .btn-del:hover { background: #fef2f2; color: #dc2626; border-color: #ef4444; }
+    .note-item.active {
+      background: var(--accent-light);
+      border-color: var(--accent-border);
+    }
 
-  /* ── MODAL ── */
-  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 100; align-items: center; justify-content: center; }
-  .modal-bg.open { display: flex; }
-  .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 26px; width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 14px; }
-  .modal h2 { font-size: 16px; font-weight: 600; }
-  .modal input, .modal select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; outline: none; }
-  .modal input:focus, .modal select:focus { border-color: var(--accent); }
-  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .note-item-title {
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-  @media (max-width: 640px) {
-    aside { display: none; }
-    .apuntes-main { padding: 20px 16px 60px; }
-    .eg-grid { grid-template-columns: 1fr; }
-  }
-</style>
+    .note-item.active .note-item-title {
+      color: var(--accent);
+    }
+
+    .note-item-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .apuntes-main {
+      flex: 1;
+      padding: 28px 28px 60px;
+      max-width: 720px;
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .empty-icon {
+      font-size: 44px;
+    }
+
+    .empty-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .empty-desc {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 340px;
+      line-height: 1.6;
+    }
+
+    .note-view {
+      display: none;
+    }
+
+    .note-view.active {
+      display: block;
+    }
+
+    .note-hdr {
+      margin-bottom: 20px;
+    }
+
+    .note-hdr-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .note-title-input {
+      font-size: 21px;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--font);
+      width: 100%;
+      outline: none;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      transition: border-color .15s;
+    }
+
+    .note-title-input:focus {
+      border-bottom-color: var(--accent);
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .tag-grammar {
+      background: var(--tag-grammar);
+      color: var(--tag-grammar-t);
+    }
+
+    .tag-vocab {
+      background: var(--tag-vocab);
+      color: var(--tag-vocab-t);
+    }
+
+    .tag-reading {
+      background: var(--tag-reading);
+      color: var(--tag-reading-t);
+    }
+
+    .tag-writing {
+      background: var(--tag-writing);
+      color: var(--tag-writing-t);
+    }
+
+    .tag-listening {
+      background: var(--tag-listening);
+      color: var(--tag-listening-t);
+    }
+
+    .tag-speaking {
+      background: var(--tag-speaking);
+      color: var(--tag-speaking-t);
+    }
+
+    .meta-select {
+      font-size: 12px;
+      font-family: var(--font);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 3px 10px;
+      border-radius: 99px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .note-date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 18px 0;
+    }
+
+    .tblock {
+      margin-bottom: 20px;
+    }
+
+    .tblock h3 {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    textarea.field {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 11px 14px;
+      resize: vertical;
+      outline: none;
+      transition: border-color .15s;
+      min-height: 80px;
+    }
+
+    textarea.field:focus {
+      border-color: var(--accent);
+    }
+
+    textarea.field.tall {
+      min-height: 110px;
+    }
+
+    textarea.field.short {
+      min-height: 56px;
+    }
+
+    .eg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .eg-box {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .eg-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .act-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      opacity: .88;
+      color: #fff;
+    }
+
+    .btn-del {
+      color: #ef4444;
+      border-color: #fca5a5;
+    }
+
+    .btn-del:hover {
+      background: #fef2f2;
+      color: #dc2626;
+      border-color: #ef4444;
+    }
+
+    /* ── MODAL ── */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .45);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-bg.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal h2 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .modal input,
+    .modal select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .modal input:focus,
+    .modal select:focus {
+      border-color: var(--accent);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 640px) {
+      aside {
+        display: none;
+      }
+
+      .apuntes-main {
+        padding: 20px 16px 60px;
+      }
+
+      .eg-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <div class="logo">
-    <div class="logo-badge">Cambridge</div>
-    <h1>A2 Key — Mi Estudio</h1>
-  </div>
-  <div class="global-progress">
-    <div class="global-bar-wrap"><div class="global-bar" id="globalBar"></div></div>
-    <span id="globalLabel">0%</span>
-  </div>
-</header>
-
-<div class="nav-tabs">
-  <div class="nav-tab active" onclick="showPage('temario',this)">📋 Temario</div>
-  <div class="nav-tab" onclick="showPage('apuntes',this)">📓 Apuntes</div>
-</div>
-
-<!-- ════ PÁGINA TEMARIO ════ -->
-<div class="page active" id="page-temario">
-  <div class="temario-wrap">
-    <div class="sec-tabs" id="secTabs"></div>
-    <div id="secContent"></div>
-  </div>
-</div>
-
-<!-- ════ PÁGINA APUNTES ════ -->
-<div class="page" id="page-apuntes">
-  <div class="apuntes-layout">
-    <aside>
-      <button class="new-btn" onclick="openModal()">+ Nuevo apunte</button>
-      <div id="noteList"></div>
-    </aside>
-    <div class="apuntes-main" id="apuntesMain">
-      <div class="empty-state" id="emptyState">
-        <div class="empty-icon">📓</div>
-        <div class="empty-title">Todavía no tenés apuntes</div>
-        <div class="empty-desc">Hacé clic en "+ Nuevo apunte" o en "Tomar apunte" desde cualquier tema del temario.</div>
-        <button class="btn btn-primary" style="margin-top:8px" onclick="openModal()">+ Crear primer apunte</button>
+  <header>
+    <div class="logo">
+      <div class="logo-badge">Cambridge</div>
+      <h1>A2 Key — Mi Estudio</h1>
+    </div>
+    <div class="global-progress">
+      <div class="global-bar-wrap">
+        <div class="global-bar" id="globalBar"></div>
       </div>
-      <div id="noteView" class="note-view"></div>
+      <span id="globalLabel">0%</span>
+    </div>
+  </header>
+
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showPage('temario',this)">📋 Temario</div>
+    <div class="nav-tab" onclick="showPage('apuntes',this)">📓 Apuntes</div>
+  </div>
+
+  <!-- ════ PÁGINA TEMARIO ════ -->
+  <div class="page active" id="page-temario">
+    <div class="temario-wrap">
+      <div class="sec-tabs" id="secTabs"></div>
+      <div id="secContent"></div>
     </div>
   </div>
-</div>
 
-<!-- ── MODAL ── -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal">
-    <h2>Nuevo apunte</h2>
-    <input type="text" id="newTitle" placeholder="Tema — ej: Presente simple" />
-    <select id="newCategory">
-      <option value="grammar">📝 Gramática</option>
-      <option value="vocab">📚 Vocabulario</option>
-      <option value="reading">👁 Reading</option>
-      <option value="writing">✍️ Writing</option>
-      <option value="listening">👂 Listening</option>
-      <option value="speaking">🗣 Speaking</option>
-    </select>
-    <div class="modal-actions">
-      <button class="btn" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="createNote()">Crear</button>
+  <!-- ════ PÁGINA APUNTES ════ -->
+  <div class="page" id="page-apuntes">
+    <div class="apuntes-layout">
+      <aside>
+        <button class="new-btn" onclick="openModal()">+ Nuevo apunte</button>
+        <div id="noteList"></div>
+      </aside>
+      <div class="apuntes-main" id="apuntesMain">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">📓</div>
+          <div class="empty-title">Todavía no tenés apuntes</div>
+          <div class="empty-desc">Hacé clic en "+ Nuevo apunte" o en "Tomar apunte" desde cualquier tema del temario.
+          </div>
+          <button class="btn btn-primary" style="margin-top:8px" onclick="openModal()">+ Crear primer apunte</button>
+        </div>
+        <div id="noteView" class="note-view"></div>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-/* ══════════════════════ DATA ══════════════════════ */
-const SECTIONS = [
-  { id:'grammar', label:'Gramática', icon:'📝', desc:'Temas gramaticales del examen A2 Key.', topics:[
-    {name:'Presente simple', detail:'I work / She works — hábitos y verdades generales'},
-    {name:'Presente continuo', detail:'I am working — acciones en progreso ahora mismo'},
-    {name:'Pasado simple', detail:'I worked / went — acciones terminadas en el pasado'},
-    {name:'Futuro con "will"', detail:'I will help you — predicciones, promesas y decisiones espontáneas'},
-    {name:'Futuro con "going to"', detail:'I am going to study — planes e intenciones ya decididas'},
-    {name:'Preguntas y negaciones', detail:"Do/Does/Did, am/is/are not, can't, don't, didn't"},
-    {name:'Artículos: a / an / the', detail:'A book, an apple, the car — cuándo usar cada uno'},
-    {name:'Sustantivos contables e incontables', detail:'Some water / three books — uso de much, many, a lot of'},
-    {name:'Adjetivos y comparativos', detail:'big → bigger → biggest / more expensive than / as tall as'},
-    {name:'Pronombres', detail:'I/me/my/mine — she/her/hers — they/them/their — reflexivos'},
-    {name:'Preposiciones de lugar y tiempo', detail:'in/on/at/under/next to — at 5pm, in June, on Monday'},
-    {name:'Verbos modales básicos', detail:'can, could, should, must, have to, would like'},
-    {name:'Oraciones con "because", "if", "when"', detail:"I came because you asked. I'll leave if you do that."},
-    {name:'Imperativo', detail:"Come here! Don't touch that! — órdenes e instrucciones"},
-  ]},
-  { id:'vocab', label:'Vocabulario', icon:'📚', desc:'Áreas temáticas de vocabulario del examen.', topics:[
-    {name:'Familia y relaciones', detail:'mother, brother, friend, neighbour, partner, relative'},
-    {name:'Casa y hogar', detail:'bedroom, kitchen, furniture, rent, move in, appliance'},
-    {name:'Comida y bebida', detail:'restaurant, menu, ingredients, meal, recipe, taste'},
-    {name:'Ropa y compras', detail:'size, price, receipt, try on, sale, fitting room'},
-    {name:'Trabajo y profesiones', detail:'office, salary, interview, manager, colleague, CV'},
-    {name:'Viajes y transporte', detail:'airport, ticket, platform, delay, passport, boarding'},
-    {name:'Tiempo libre y deportes', detail:'hobby, match, team, practice, score, tournament'},
-    {name:'Salud y cuerpo', detail:'headache, doctor, medicine, appointment, symptom'},
-    {name:'Educación', detail:'lesson, exam, degree, subject, homework, university'},
-    {name:'Clima y naturaleza', detail:'sunny, storm, temperature, season, forecast, flood'},
-    {name:'Tecnología y comunicación', detail:'email, message, laptop, social media, app, download'},
-    {name:'Ciudad y lugares', detail:'museum, library, supermarket, corner, neighbourhood'},
-    {name:'Números, fechas y hora', detail:'ordinal numbers, dates, schedules, timetables'},
-    {name:'Descripción de personas', detail:'appearance, personality, age, height, character'},
-    {name:'Entretenimiento y medios', detail:'film, concert, magazine, review, channel, series'},
-    {name:'Dinero y finanzas básicas', detail:'cost, pay, save, afford, change, bill, receipt'},
-  ]},
-  { id:'reading', label:'Reading', icon:'👁', desc:'Comprensión lectora — vale 50% del examen (junto con Writing).', topics:[
-    {name:'Part 1 — Textos cortos del mundo real', detail:'Carteles, mensajes, emails breves. Identificar la idea principal.'},
-    {name:'Part 2 — Opciones múltiples', detail:'Texto más largo con 5 preguntas de opción múltiple (A/B/C).'},
-    {name:'Part 3 — Completar oraciones', detail:'Texto con frases para completar eligiendo la opción correcta.'},
-    {name:'Part 4 — Verdadero / Falso / No dice', detail:'Distinguir entre "falso" y "no dice" en base a un artículo.'},
-    {name:'Part 5 — Completar texto con palabras', detail:'Texto con espacios en blanco — elegir la palabra correcta.'},
-  ]},
-  { id:'writing', label:'Writing', icon:'✍️', desc:'Escritura — mismo papel que Reading (50% total).', topics:[
-    {name:'Part 6 — Email o nota corta', detail:'~25 palabras respondiendo a un email o nota de un amigo.'},
-    {name:'Part 7 — Historia corta con fotos', detail:'~35 palabras de historia basándose en 3 imágenes dadas.'},
-  ]},
-  { id:'listening', label:'Listening', icon:'👂', desc:'Comprensión auditiva — 25% del examen total.', topics:[
-    {name:'Part 1 — Conversaciones cortas + imágenes', detail:'5 diálogos breves, elegir la imagen correcta (A/B/C).'},
-    {name:'Part 2 — Completar formulario', detail:'Escuchar un monólogo y completar una tabla o ficha.'},
-    {name:'Part 3 — Opciones múltiples en diálogo', detail:'5 preguntas de opción múltiple sobre una conversación larga.'},
-    {name:'Part 4 — Verdadero / Falso en diálogo', detail:'5 afirmaciones para marcar como verdaderas o falsas.'},
-    {name:'Part 5 — Relacionar personas con opciones', detail:'Relacionar 5 personas o situaciones con opciones de una lista.'},
-  ]},
-  { id:'speaking', label:'Speaking', icon:'🗣', desc:'Expresión oral presencial — 25% del examen total.', topics:[
-    {name:'Part 1 — Preguntas personales', detail:'El examinador pregunta sobre vos: nombre, trabajo, familia, gustos.'},
-    {name:'Part 2 — Descripción y comparación de fotos', detail:'Describir y comparar dos fotos durante ~1-2 minutos.'},
-  ]},
-];
+  <!-- ── MODAL ── -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal">
+      <h2>Nuevo apunte</h2>
+      <input type="text" id="newTitle" placeholder="Tema — ej: Presente simple" />
+      <select id="newCategory">
+        <option value="grammar">📝 Gramática</option>
+        <option value="vocab">📚 Vocabulario</option>
+        <option value="reading">👁 Reading</option>
+        <option value="writing">✍️ Writing</option>
+        <option value="listening">👂 Listening</option>
+        <option value="speaking">🗣 Speaking</option>
+      </select>
+      <div class="modal-actions">
+        <button class="btn" onclick="closeModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="createNote()">Crear</button>
+      </div>
+    </div>
+  </div>
 
-const CATS = {
-  grammar:'Gramática', vocab:'Vocabulario', reading:'Reading',
-  writing:'Writing', listening:'Listening', speaking:'Speaking'
-};
-const ICONS = {grammar:'📝',vocab:'📚',reading:'👁',writing:'✍️',listening:'👂',speaking:'🗣'};
+  <script>
+    /* ══════════════════════ DATA ══════════════════════ */
+    const SECTIONS = [
+      {
+        id: 'grammar', label: 'Gramática', icon: '📝', desc: 'Temas gramaticales del examen A2 Key.', topics: [
+          { name: 'Presente simple', detail: 'I work / She works — hábitos y verdades generales' },
+          { name: 'Presente continuo', detail: 'I am working — acciones en progreso ahora mismo' },
+          { name: 'Pasado simple', detail: 'I worked / went — acciones terminadas en el pasado' },
+          { name: 'Futuro con "will"', detail: 'I will help you — predicciones, promesas y decisiones espontáneas' },
+          { name: 'Futuro con "going to"', detail: 'I am going to study — planes e intenciones ya decididas' },
+          { name: 'Preguntas y negaciones', detail: "Do/Does/Did, am/is/are not, can't, don't, didn't" },
+          { name: 'Artículos: a / an / the', detail: 'A book, an apple, the car — cuándo usar cada uno' },
+          { name: 'Sustantivos contables e incontables', detail: 'Some water / three books — uso de much, many, a lot of' },
+          { name: 'Adjetivos y comparativos', detail: 'big → bigger → biggest / more expensive than / as tall as' },
+          { name: 'Pronombres', detail: 'I/me/my/mine — she/her/hers — they/them/their — reflexivos' },
+          { name: 'Preposiciones de lugar y tiempo', detail: 'in/on/at/under/next to — at 5pm, in June, on Monday' },
+          { name: 'Verbos modales básicos', detail: 'can, could, should, must, have to, would like' },
+          { name: 'Oraciones con "because", "if", "when"', detail: "I came because you asked. I'll leave if you do that." },
+          { name: 'Imperativo', detail: "Come here! Don't touch that! — órdenes e instrucciones" },
+        ]
+      },
+      {
+        id: 'vocab', label: 'Vocabulario', icon: '📚', desc: 'Áreas temáticas de vocabulario del examen.', topics: [
+          { name: 'Familia y relaciones', detail: 'mother, brother, friend, neighbour, partner, relative' },
+          { name: 'Casa y hogar', detail: 'bedroom, kitchen, furniture, rent, move in, appliance' },
+          { name: 'Comida y bebida', detail: 'restaurant, menu, ingredients, meal, recipe, taste' },
+          { name: 'Ropa y compras', detail: 'size, price, receipt, try on, sale, fitting room' },
+          { name: 'Trabajo y profesiones', detail: 'office, salary, interview, manager, colleague, CV' },
+          { name: 'Viajes y transporte', detail: 'airport, ticket, platform, delay, passport, boarding' },
+          { name: 'Tiempo libre y deportes', detail: 'hobby, match, team, practice, score, tournament' },
+          { name: 'Salud y cuerpo', detail: 'headache, doctor, medicine, appointment, symptom' },
+          { name: 'Educación', detail: 'lesson, exam, degree, subject, homework, university' },
+          { name: 'Clima y naturaleza', detail: 'sunny, storm, temperature, season, forecast, flood' },
+          { name: 'Tecnología y comunicación', detail: 'email, message, laptop, social media, app, download' },
+          { name: 'Ciudad y lugares', detail: 'museum, library, supermarket, corner, neighbourhood' },
+          { name: 'Números, fechas y hora', detail: 'ordinal numbers, dates, schedules, timetables' },
+          { name: 'Descripción de personas', detail: 'appearance, personality, age, height, character' },
+          { name: 'Entretenimiento y medios', detail: 'film, concert, magazine, review, channel, series' },
+          { name: 'Dinero y finanzas básicas', detail: 'cost, pay, save, afford, change, bill, receipt' },
+        ]
+      },
+      {
+        id: 'reading', label: 'Reading', icon: '👁', desc: 'Comprensión lectora — vale 50% del examen (junto con Writing).', topics: [
+          { name: 'Part 1 — Textos cortos del mundo real', detail: 'Carteles, mensajes, emails breves. Identificar la idea principal.' },
+          { name: 'Part 2 — Opciones múltiples', detail: 'Texto más largo con 5 preguntas de opción múltiple (A/B/C).' },
+          { name: 'Part 3 — Completar oraciones', detail: 'Texto con frases para completar eligiendo la opción correcta.' },
+          { name: 'Part 4 — Verdadero / Falso / No dice', detail: 'Distinguir entre "falso" y "no dice" en base a un artículo.' },
+          { name: 'Part 5 — Completar texto con palabras', detail: 'Texto con espacios en blanco — elegir la palabra correcta.' },
+        ]
+      },
+      {
+        id: 'writing', label: 'Writing', icon: '✍️', desc: 'Escritura — mismo papel que Reading (50% total).', topics: [
+          { name: 'Part 6 — Email o nota corta', detail: '~25 palabras respondiendo a un email o nota de un amigo.' },
+          { name: 'Part 7 — Historia corta con fotos', detail: '~35 palabras de historia basándose en 3 imágenes dadas.' },
+        ]
+      },
+      {
+        id: 'listening', label: 'Listening', icon: '👂', desc: 'Comprensión auditiva — 25% del examen total.', topics: [
+          { name: 'Part 1 — Conversaciones cortas + imágenes', detail: '5 diálogos breves, elegir la imagen correcta (A/B/C).' },
+          { name: 'Part 2 — Completar formulario', detail: 'Escuchar un monólogo y completar una tabla o ficha.' },
+          { name: 'Part 3 — Opciones múltiples en diálogo', detail: '5 preguntas de opción múltiple sobre una conversación larga.' },
+          { name: 'Part 4 — Verdadero / Falso en diálogo', detail: '5 afirmaciones para marcar como verdaderas o falsas.' },
+          { name: 'Part 5 — Relacionar personas con opciones', detail: 'Relacionar 5 personas o situaciones con opciones de una lista.' },
+        ]
+      },
+      {
+        id: 'speaking', label: 'Speaking', icon: '🗣', desc: 'Expresión oral presencial — 25% del examen total.', topics: [
+          { name: 'Part 1 — Preguntas personales', detail: 'El examinador pregunta sobre vos: nombre, trabajo, familia, gustos.' },
+          { name: 'Part 2 — Descripción y comparación de fotos', detail: 'Describir y comparar dos fotos durante ~1-2 minutos.' },
+        ]
+      },
+    ];
 
-const T_KEY = 'cambridge_a2_progress';
-const N_KEY = 'ingles_apuntes_v1';
+    const CATS = {
+      grammar: 'Gramática', vocab: 'Vocabulario', reading: 'Reading',
+      writing: 'Writing', listening: 'Listening', speaking: 'Speaking'
+    };
+    const ICONS = { grammar: '📝', vocab: '📚', reading: '👁', writing: '✍️', listening: '👂', speaking: '🗣' };
 
-let tState = (() => { try { return JSON.parse(localStorage.getItem(T_KEY)) || {}; } catch(e){return{};} })();
-let notes  = (() => { try { return JSON.parse(localStorage.getItem(N_KEY))  || []; } catch(e){return[];} })();
-let activeSection = SECTIONS[0].id;
-let activeNoteId  = null;
-let prefilledTitle = '';
-let prefilledCat   = 'grammar';
+    const T_KEY = 'cambridge_a2_progress';
+    const N_KEY = 'ingles_apuntes_v1';
 
-function saveT() { localStorage.setItem(T_KEY, JSON.stringify(tState)); }
-function saveN() { localStorage.setItem(N_KEY, JSON.stringify(notes)); }
+    let tState = (() => { try { return JSON.parse(localStorage.getItem(T_KEY)) || {}; } catch (e) { return {}; } })();
+    let notes = (() => { try { return JSON.parse(localStorage.getItem(N_KEY)) || []; } catch (e) { return []; } })();
+    let activeSection = SECTIONS[0].id;
+    let activeNoteId = null;
+    let prefilledTitle = '';
+    let prefilledCat = 'grammar';
 
-/* ══════════════════════ PAGE NAV ══════════════════════ */
-function showPage(id, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  el.classList.add('active');
-}
+    function saveT() { localStorage.setItem(T_KEY, JSON.stringify(tState)); }
+    function saveN() { localStorage.setItem(N_KEY, JSON.stringify(notes)); }
 
-/* ══════════════════════ TEMARIO ══════════════════════ */
-function isDone(sid, i) { return (tState[sid]||[]).includes(i); }
+    /* ══════════════════════ PAGE NAV ══════════════════════ */
+    function showPage(id, el) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      el.classList.add('active');
+    }
 
-function toggleTopic(sid, i) {
-  if (!tState[sid]) tState[sid] = [];
-  const idx = tState[sid].indexOf(i);
-  if (idx === -1) tState[sid].push(i); else tState[sid].splice(idx,1);
-  saveT(); renderTemario(); renderGlobal();
-}
+    /* ══════════════════════ TEMARIO ══════════════════════ */
+    function isDone(sid, i) { return (tState[sid] || []).includes(i); }
 
-function getProgress(sid) {
-  const sec = SECTIONS.find(s=>s.id===sid);
-  const done = (tState[sid]||[]).length;
-  return { done, total: sec.topics.length, pct: Math.round(done/sec.topics.length*100) };
-}
+    function toggleTopic(sid, i) {
+      if (!tState[sid]) tState[sid] = [];
+      const idx = tState[sid].indexOf(i);
+      if (idx === -1) tState[sid].push(i); else tState[sid].splice(idx, 1);
+      saveT(); renderTemario(); renderGlobal();
+    }
 
-function renderTemario() {
-  // tabs
-  const tabs = document.getElementById('secTabs');
-  tabs.innerHTML = '';
-  SECTIONS.forEach(sec => {
-    const p = getProgress(sec.id);
-    const btn = document.createElement('button');
-    btn.className = 'sec-tab' + (activeSection===sec.id?' active':'');
-    btn.innerHTML = `${sec.icon} ${sec.label} <span class="cnt">${p.done}/${p.total}</span>`;
-    btn.onclick = () => { activeSection = sec.id; renderTemario(); };
-    tabs.appendChild(btn);
-  });
+    function getProgress(sid) {
+      const sec = SECTIONS.find(s => s.id === sid);
+      const done = (tState[sid] || []).length;
+      return { done, total: sec.topics.length, pct: Math.round(done / sec.topics.length * 100) };
+    }
 
-  // content
-  const cont = document.getElementById('secContent');
-  cont.innerHTML = '';
-  SECTIONS.forEach(sec => {
-    const p = getProgress(sec.id);
-    const div = document.createElement('div');
-    div.className = 't-section' + (activeSection===sec.id?' active':'');
+    function renderTemario() {
+      // tabs
+      const tabs = document.getElementById('secTabs');
+      tabs.innerHTML = '';
+      SECTIONS.forEach(sec => {
+        const p = getProgress(sec.id);
+        const btn = document.createElement('button');
+        btn.className = 'sec-tab' + (activeSection === sec.id ? ' active' : '');
+        btn.innerHTML = `${sec.icon} ${sec.label} <span class="cnt">${p.done}/${p.total}</span>`;
+        btn.onclick = () => { activeSection = sec.id; renderTemario(); };
+        tabs.appendChild(btn);
+      });
 
-    div.innerHTML = `
+      // content
+      const cont = document.getElementById('secContent');
+      cont.innerHTML = '';
+      SECTIONS.forEach(sec => {
+        const p = getProgress(sec.id);
+        const div = document.createElement('div');
+        div.className = 't-section' + (activeSection === sec.id ? ' active' : '');
+
+        div.innerHTML = `
       <div class="t-sec-header">
         <div class="t-sec-title">${sec.icon} ${sec.label}</div>
         <div class="t-sec-desc">${sec.desc}</div>
         <div class="progress-row">
-          <div class="sec-bar-bg"><div class="sec-bar${p.done===p.total?' done':''}" style="width:${p.pct}%"></div></div>
+          <div class="sec-bar-bg"><div class="sec-bar${p.done === p.total ? ' done' : ''}" style="width:${p.pct}%"></div></div>
           <div class="sec-lbl">${p.done} de ${p.total} completados</div>
         </div>
       </div>
       <div id="tl-${sec.id}"></div>
     `;
-    cont.appendChild(div);
+        cont.appendChild(div);
 
-    const list = div.querySelector('#tl-'+sec.id);
-    sec.topics.forEach((t, i) => {
-      const d = document.createElement('div');
-      d.className = 'topic' + (isDone(sec.id,i)?' done':'');
-      const hasNote = notes.some(n => n.title === t.name && n.category === sec.id);
-      d.innerHTML = `
-        <div class="chk">${isDone(sec.id,i)?'✓':''}</div>
+        const list = div.querySelector('#tl-' + sec.id);
+        sec.topics.forEach((t, i) => {
+          const d = document.createElement('div');
+          d.className = 'topic' + (isDone(sec.id, i) ? ' done' : '');
+          const hasNote = notes.some(n => n.title === t.name && n.category === sec.id);
+          d.innerHTML = `
+        <div class="chk">${isDone(sec.id, i) ? '✓' : ''}</div>
         <div class="topic-body">
           <div class="topic-name">${t.name}</div>
           <div class="topic-detail">${t.detail}</div>
@@ -478,119 +1074,120 @@ function renderTemario() {
           </span>
         </div>
       `;
-      d.onclick = () => toggleTopic(sec.id, i);
-      list.appendChild(d);
-    });
-  });
-}
+          d.onclick = () => toggleTopic(sec.id, i);
+          list.appendChild(d);
+        });
+      });
+    }
 
-function renderGlobal() {
-  let done=0, total=0;
-  SECTIONS.forEach(s => { const p=getProgress(s.id); done+=p.done; total+=p.total; });
-  const pct = Math.round(done/total*100);
-  document.getElementById('globalBar').style.width = pct+'%';
-  document.getElementById('globalLabel').textContent = pct+'%';
-}
+    function renderGlobal() {
+      let done = 0, total = 0;
+      SECTIONS.forEach(s => { const p = getProgress(s.id); done += p.done; total += p.total; });
+      const pct = Math.round(done / total * 100);
+      document.getElementById('globalBar').style.width = pct + '%';
+      document.getElementById('globalLabel').textContent = pct + '%';
+    }
 
-/* ══════════════════════ APUNTES ══════════════════════ */
-function goToNote(title, cat) {
-  const existing = notes.find(n => n.title===title && n.category===cat);
-  if (existing) {
-    activeNoteId = existing.id;
-  } else {
-    prefilledTitle = title; prefilledCat = cat;
-    openModal();
-    return;
-  }
-  // switch to apuntes page
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-apuntes').classList.add('active');
-  document.querySelectorAll('.nav-tab')[1].classList.add('active');
-  renderApuntes();
-}
+    /* ══════════════════════ APUNTES ══════════════════════ */
+    function goToNote(title, cat) {
+      const existing = notes.find(n => n.title === title && n.category === cat);
+      if (existing) {
+        activeNoteId = existing.id;
+      } else {
+        prefilledTitle = title; prefilledCat = cat;
+        openModal();
+        return;
+      }
+      // switch to apuntes page
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('page-apuntes').classList.add('active');
+      document.querySelectorAll('.nav-tab')[1].classList.add('active');
+      renderApuntes();
+    }
 
-function openModal(title='', cat='grammar') {
-  document.getElementById('newTitle').value = prefilledTitle || title;
-  document.getElementById('newCategory').value = prefilledCat || cat;
-  document.getElementById('modalBg').classList.add('open');
-  setTimeout(()=>document.getElementById('newTitle').focus(), 50);
-}
+    function openModal(title = '', cat = 'grammar') {
+      document.getElementById('newTitle').value = prefilledTitle || title;
+      document.getElementById('newCategory').value = prefilledCat || cat;
+      document.getElementById('modalBg').classList.add('open');
+      setTimeout(() => document.getElementById('newTitle').focus(), 50);
+    }
 
-function closeModal() {
-  document.getElementById('modalBg').classList.remove('open');
-  document.getElementById('newTitle').value = '';
-  prefilledTitle = ''; prefilledCat = 'grammar';
-}
+    function closeModal() {
+      document.getElementById('modalBg').classList.remove('open');
+      document.getElementById('newTitle').value = '';
+      prefilledTitle = ''; prefilledCat = 'grammar';
+    }
 
-document.getElementById('modalBg').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
-document.getElementById('newTitle').addEventListener('keydown', e => { if(e.key==='Enter') createNote(); });
+    document.getElementById('modalBg').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+    document.getElementById('newTitle').addEventListener('keydown', e => { if (e.key === 'Enter') createNote(); });
 
-function createNote() {
-  const title = document.getElementById('newTitle').value.trim();
-  const cat   = document.getElementById('newCategory').value;
-  if (!title) { document.getElementById('newTitle').focus(); return; }
-  const note = { id: Date.now().toString(), title, category: cat, date: new Date().toLocaleDateString('es-AR'),
-    explicacion:'', estructura:'', ejemplo_correcto:'', ejemplo_incorrecto:'', vocabulario:'', errores:'', notas:'' };
-  notes.unshift(note);
-  saveN();
-  activeNoteId = note.id;
-  closeModal();
-  // switch to apuntes
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-apuntes').classList.add('active');
-  document.querySelectorAll('.nav-tab')[1].classList.add('active');
-  renderApuntes();
-}
+    function createNote() {
+      const title = document.getElementById('newTitle').value.trim();
+      const cat = document.getElementById('newCategory').value;
+      if (!title) { document.getElementById('newTitle').focus(); return; }
+      const note = {
+        id: Date.now().toString(), title, category: cat, date: new Date().toLocaleDateString('es-AR'),
+        explicacion: '', estructura: '', ejemplo_correcto: '', ejemplo_incorrecto: '', vocabulario: '', errores: '', notas: ''
+      };
+      notes.unshift(note);
+      saveN();
+      activeNoteId = note.id;
+      closeModal();
+      // switch to apuntes
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('page-apuntes').classList.add('active');
+      document.querySelectorAll('.nav-tab')[1].classList.add('active');
+      renderApuntes();
+    }
 
-function deleteNote(id) {
-  if (!confirm('¿Borrar este apunte?')) return;
-  notes = notes.filter(n=>n.id!==id);
-  activeNoteId = null; saveN(); renderApuntes();
-}
+    function deleteNote(id) {
+      if (!confirm('¿Borrar este apunte?')) return;
+      notes = notes.filter(n => n.id !== id);
+      activeNoteId = null; saveN(); renderApuntes();
+    }
 
-function updateField(id, field, value) {
-  const note = notes.find(n=>n.id===id);
-  if (note) { note[field]=value; saveN(); renderNoteList(); renderTemario(); }
-}
+    function updateField(id, field, value) {
+      const note = notes.find(n => n.id === id);
+      if (note) { note[field] = value; saveN(); renderNoteList(); renderTemario(); }
+    }
 
-function renderNoteList() {
-  const list = document.getElementById('noteList');
-  if (!notes.length) { list.innerHTML='<div style="font-size:13px;color:var(--muted);padding:6px">Sin apuntes aún.</div>'; return; }
-  const groups = {};
-  notes.forEach(n => { if(!groups[n.category]) groups[n.category]=[]; groups[n.category].push(n); });
-  let html = '';
-  Object.entries(CATS).forEach(([key, label]) => {
-    if (!groups[key]) return;
-    html += `<div class="aside-label">${ICONS[key]} ${label}</div>`;
-    groups[key].forEach(n => {
-      html += `<div class="note-item${activeNoteId===n.id?' active':''}" onclick="activeNoteId='${n.id}';renderApuntes()">
+    function renderNoteList() {
+      const list = document.getElementById('noteList');
+      if (!notes.length) { list.innerHTML = '<div style="font-size:13px;color:var(--muted);padding:6px">Sin apuntes aún.</div>'; return; }
+      const groups = {};
+      notes.forEach(n => { if (!groups[n.category]) groups[n.category] = []; groups[n.category].push(n); });
+      let html = '';
+      Object.entries(CATS).forEach(([key, label]) => {
+        if (!groups[key]) return;
+        html += `<div class="aside-label">${ICONS[key]} ${label}</div>`;
+        groups[key].forEach(n => {
+          html += `<div class="note-item${activeNoteId === n.id ? ' active' : ''}" onclick="activeNoteId='${n.id}';renderApuntes()">
         <div class="note-item-title">${escHtml(n.title)}</div>
         <div class="note-item-meta">${n.date}</div>
       </div>`;
-    });
-  });
-  list.innerHTML = html;
-}
+        });
+      });
+      list.innerHTML = html;
+    }
 
-function renderNoteView() {
-  const view  = document.getElementById('noteView');
-  const empty = document.getElementById('emptyState');
-  const note  = notes.find(n=>n.id===activeNoteId);
-  if (!note) { view.classList.remove('active'); empty.style.display=''; return; }
-  empty.style.display = 'none';
-  view.classList.add('active');
-  view.innerHTML = `
+    function renderNoteView() {
+      const view = document.getElementById('noteView');
+      const empty = document.getElementById('emptyState');
+      const note = notes.find(n => n.id === activeNoteId);
+      if (!note) { view.classList.remove('active'); empty.style.display = ''; return; }
+      empty.style.display = 'none';
+      view.classList.add('active');
+      view.innerHTML = `
     <div class="note-hdr">
       <div class="note-hdr-top">
         <input class="note-title-input" value="${escHtml(note.title)}" placeholder="Título"
           onchange="updateField('${note.id}','title',this.value)">
       </div>
-      <div class="meta-row">
-        <span class="tag tag-${note.category}">${ICONS[note.category]} ${CATS[note.category]}</span>
+      <span class="tag tag-${note.category}">${ICONS[note.category]} ${CATS[note.category]}</span>
         <select class="meta-select" onchange="updateField('${note.id}','category',this.value);renderApuntes()">
-          ${Object.entries(CATS).map(([k,v])=>`<option value="${k}"${note.category===k?' selected':''}>${ICONS[k]} ${v}</option>`).join('')}
+          ${Object.entries(CATS).map(([k, v]) => `<option value="${k}"${note.category === k ? ' selected' : ''}>${ICONS[k]} ${v}</option>`).join('')}
         </select>
         <span class="note-date">📅 ${note.date}</span>
       </div>
@@ -603,6 +1200,15 @@ function renderNoteView() {
             <button onclick="formatCmd('italic')"><i>I</i></button>
             <button onclick="formatCmd('underline')"><u>U</u></button>
             <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+            <button onclick="formatCmd('foreColor', 'blue')" style="color:blue;">B</button>
+            <button onclick="formatCmd('foreColor', 'green')" style="color:green;">G</button>
+            <button onclick="formatCmd('foreColor', 'yellow')" style="color:gold;">Y</button>
+            <button onclick="formatCmd('foreColor', 'white')" style="color:white;">W</button>
+            <button onclick="formatCmd('foreColor', 'cyan')" style="color:cyan;">C</button>
+
+
+
+
             <select onchange="formatCmd('fontSize', this.value)">
               <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
             </select>
@@ -612,13 +1218,26 @@ function renderNoteView() {
         <div class="tblock">
           <h3>🔧 Estructura / Regla</h3>
           <div class="toolbar">
-            <button onclick="formatCmd('bold')"><b>B</b></button>
-            <button onclick="formatCmd('italic')"><i>I</i></button>
-            <button onclick="formatCmd('underline')"><u>U</u></button>
-            <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
-            <select onchange="formatCmd('fontSize', this.value)">
-              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
-            </select>
+  <button onclick="formatCmd('bold')"><b>B</b></button>
+  <button onclick="formatCmd('italic')"><i>I</i></button>
+  <button onclick="formatCmd('underline')"><u>U</u></button>
+  <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+  <button onclick="formatCmd('foreColor', 'blue')" style="color:blue;">B</button>
+  <button onclick="formatCmd('foreColor', 'green')" style="color:green;">G</button>
+  <button onclick="formatCmd('foreColor', 'yellow')" style="color:gold;">Y</button>
+  <button onclick="formatCmd('foreColor', 'white')" style="color:white;">W</button>
+  <button onclick="formatCmd('foreColor', 'cyan')" style="color:cyan;">C</button>
+  <select onchange="formatCmd('fontSize', this.value)">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4" selected>4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+  </select>
+</div>
+           
           </div>
           <div class="rich-editor" contenteditable="true" data-field="estructura" oninput="richInput(this)" >${note.estructura}</div>
         </div>
@@ -632,6 +1251,11 @@ function renderNoteView() {
                 <button onclick="formatCmd('italic')"><i>I</i></button>
                 <button onclick="formatCmd('underline')"><u>U</u></button>
                 <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+                <button onclick="formatCmd('foreColor', 'blue')" style="color:blue;">B</button>
+                <button onclick="formatCmd('foreColor', 'green')" style="color:green;">G</button>
+                <button onclick="formatCmd('foreColor', 'yellow')" style="color:gold;">Y</button>
+                <button onclick="formatCmd('foreColor', 'white')" style="color:white;">W</button>
+                <button onclick="formatCmd('foreColor', 'cyan')" style="color:cyan;">C</button>
                 <select onchange="formatCmd('fontSize', this.value)">
                   <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
                 </select>
@@ -645,6 +1269,11 @@ function renderNoteView() {
                 <button onclick="formatCmd('italic')"><i>I</i></button>
                 <button onclick="formatCmd('underline')"><u>U</u></button>
                 <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+                <button onclick="formatCmd('foreColor', 'blue')" style="color:blue;">B</button>
+                <button onclick="formatCmd('foreColor', 'green')" style="color:green;">G</button>
+                <button onclick="formatCmd('foreColor', 'yellow')" style="color:gold;">Y</button>
+                <button onclick="formatCmd('foreColor', 'white')" style="color:white;">W</button>
+                <button onclick="formatCmd('foreColor', 'cyan')" style="color:cyan;">C</button>
                 <select onchange="formatCmd('fontSize', this.value)">
                   <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
                 </select>
@@ -655,14 +1284,21 @@ function renderNoteView() {
         </div>
         <div class="tblock">
           <h3>📝 Vocabulario relacionado</h3>
-          <div class="toolbar">
-            <button onclick="formatCmd('bold')"><b>B</b></button>
-            <button onclick="formatCmd('italic')"><i>I</i></button>
-            <button onclick="formatCmd('underline')"><u>U</u></button>
-            <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
-            <select onchange="formatCmd('fontSize', this.value)">
-              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
-            </select>
+<div class="toolbar">
+  <button onclick="formatCmd('bold')"><b>B</b></button>
+  <button onclick="formatCmd('italic')"><i>I</i></button>
+  <button onclick="formatCmd('underline')"><u>U</u></button>
+  <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+  <button onclick="formatCmd('foreColor', 'blue')" style="color:blue;">B</button>
+  <button onclick="formatCmd('foreColor', 'green')" style="color:green;">G</button>
+  <button onclick="formatCmd('foreColor', 'yellow')" style="color:gold;">Y</button>
+  <button onclick="formatCmd('foreColor', 'white')" style="color:white;">W</button>
+  <button onclick="formatCmd('foreColor', 'cyan')" style="color:cyan;">C</button>
+  <select onchange="formatCmd('fontSize', this.value)">
+    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+  </select>
+</div>
+           
           </div>
           <div class="rich-editor" contenteditable="true" data-field="vocabulario" oninput="richInput(this)" >${note.vocabulario}</div>
         </div>
@@ -696,31 +1332,32 @@ function renderNoteView() {
       <button class="btn btn-del" onclick="deleteNote('${note.id}')">🗑 Borrar apunte</button>
     </div>
   `;
-}
+    }
 
-function renderApuntes() { renderNoteList(); renderNoteView(); }
+    function renderApuntes() { renderNoteList(); renderNoteView(); }
 
-// Function to apply formatting commands
-function formatCmd(cmd, value=null) {
-  document.execCommand(cmd, false, value);
-}
+    // Function to apply formatting commands
+    function formatCmd(cmd, value = null) {
+      document.execCommand(cmd, false, value);
+    }
 
-// Handler for rich editor input to sync with note data
-function richInput(el) {
-  const field = el.getAttribute('data-field');
-  const id = activeNoteId;
-  if (!field || !id) return;
-  // Use innerHTML to preserve formatting tags
-  updateField(id, field, el.innerHTML);
-}
+    // Handler for rich editor input to sync with note data
+    function richInput(el) {
+      const field = el.getAttribute('data-field');
+      const id = activeNoteId;
+      if (!field || !id) return;
+      // Use innerHTML to preserve formatting tags
+      updateField(id, field, el.innerHTML);
+    }
 
-function esc(s) { return (s||'').replace(/'/g,"\\'"); }
-function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function esc(s) { return (s || '').replace(/'/g, "\\'"); }
+    function escHtml(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
-/* ══════════════════════ INIT ══════════════════════ */
-renderTemario();
-renderGlobal();
-renderApuntes();
-</script>
+    /* ══════════════════════ INIT ══════════════════════ */
+    renderTemario();
+    renderGlobal();
+    renderApuntes();
+  </script>
 </body>
+
 </html>
