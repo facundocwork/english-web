@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cambridge A2 Key — Mi Temario</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f6f2;
+    --bg2: #ffffff;
+    --border: #e4e2da;
+    --text: #1a1a18;
+    --muted: #6b6960;
+    --accent: #2563eb;
+    --accent-light: #eff4ff;
+    --accent-border: #bfcfff;
+    --success: #16a34a;
+    --success-light: #f0fdf4;
+    --success-border: #86efac;
+    --radius: 10px;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16161a;
+      --bg2: #1e1e24;
+      --border: #2e2e38;
+      --text: #e8e6df;
+      --muted: #8a8880;
+      --accent: #6b9fff;
+      --accent-light: #1a2240;
+      --accent-border: #2a3f7a;
+      --success: #4ade80;
+      --success-light: #0f2518;
+      --success-border: #166534;
+    }
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 32px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: 4px 10px;
+    border-radius: 99px;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .global-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .global-bar-wrap {
+    width: 120px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .global-bar {
+    height: 6px;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width .4s ease;
+    width: 0%;
+  }
+
+  .tabs-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+  }
+
+  .tab:hover { background: var(--bg2); color: var(--text); }
+
+  .tab.active {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: var(--accent-border);
+  }
+
+  .tab .tab-count {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--border);
+    color: var(--muted);
+    padding: 1px 6px;
+    border-radius: 99px;
+    transition: all .15s;
+  }
+
+  .tab.active .tab-count {
+    background: var(--accent-border);
+    color: var(--accent);
+  }
+
+  .tab .tab-done {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--success-border);
+    color: var(--success);
+    padding: 1px 6px;
+    border-radius: 99px;
+    display: none;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-header {
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .section-progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sec-bar-bg {
+    flex: 1;
+    height: 7px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .sec-bar {
+    height: 7px;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width .3s ease;
+    width: 0%;
+  }
+
+  .sec-bar.complete { background: var(--success); }
+
+  .sec-label {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    min-width: 110px;
+    text-align: right;
+  }
+
+  .topics-list { margin-top: 16px; }
+
+  .topic {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+
+  .topic:hover { border-color: var(--accent-border); }
+
+  .topic.done {
+    background: var(--success-light);
+    border-color: var(--success-border);
+  }
+
+  .check {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all .15s;
+    font-size: 12px;
+    color: transparent;
+  }
+
+  .topic.done .check {
+    background: var(--success);
+    border-color: var(--success);
+    color: #fff;
+  }
+
+  .topic-body { flex: 1; }
+
+  .topic-name {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .topic.done .topic-name { color: var(--success); }
+
+  .topic-detail {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+
+  .reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+
+  .reset-btn:hover { border-color: #f87171; color: #ef4444; }
+
+  .completed-banner {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: var(--success-light);
+    border: 1px solid var(--success-border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--success);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-badge">Cambridge</div>
+      <div>
+        <h1>A2 Key — Mi Temario</h1>
+        <div class="header-sub">Marcá los temas que ya aprendiste</div>
+      </div>
+    </div>
+    <div class="global-progress">
+      <div class="global-bar-wrap"><div class="global-bar" id="globalBar"></div></div>
+      <span id="globalLabel">0%</span>
+    </div>
+  </div>
+  <div class="tabs-row" id="tabsRow"></div>
+</header>
+
+<main id="main"></main>
+
+<script>
+const SECTIONS = [
+  {
+    id: 'grammar',
+    label: 'Gramática',
+    icon: '📝',
+    desc: 'Los temas gramaticales que aparecen en el examen A2 Key.',
+    topics: [
+      { name: 'Presente simple', detail: 'I work / She works — hábitos y verdades generales' },
+      { name: 'Presente continuo', detail: 'I am working — acciones en progreso ahora mismo' },
+      { name: 'Pasado simple', detail: 'I worked / went — acciones terminadas en el pasado' },
+      { name: 'Futuro con "will"', detail: 'I will help you — predicciones, promesas y decisiones espontáneas' },
+      { name: 'Futuro con "going to"', detail: 'I am going to study — planes e intenciones ya decididas' },
+      { name: 'Preguntas y negaciones', detail: 'Do/Does/Did, am/is/are not, can\'t, don\'t, didn\'t' },
+      { name: 'Artículos: a / an / the', detail: 'A book, an apple, the car — cuándo usar cada uno' },
+      { name: 'Sustantivos contables e incontables', detail: 'Some water / three books — uso de much, many, a lot of' },
+      { name: 'Adjetivos y comparativos', detail: 'big → bigger → biggest / more expensive than / as tall as' },
+      { name: 'Pronombres', detail: 'I/me/my/mine — she/her/hers — they/them/their — reflexivos' },
+      { name: 'Preposiciones de lugar y tiempo', detail: 'in/on/at/under/next to — at 5pm, in June, on Monday' },
+      { name: 'Verbos modales básicos', detail: 'can, could, should, must, have to, would like' },
+      { name: 'Oraciones con "because", "if", "when"', detail: 'I came because you asked. I\'ll leave if you do that.' },
+      { name: 'Imperativo', detail: 'Come here! Don\'t touch that! — órdenes e instrucciones' },
+    ]
+  },
+  {
+    id: 'vocab',
+    label: 'Vocabulario',
+    icon: '📚',
+    desc: 'Áreas temáticas de vocabulario que cubre el examen.',
+    topics: [
+      { name: 'Familia y relaciones', detail: 'mother, brother, friend, neighbour, partner, relative' },
+      { name: 'Casa y hogar', detail: 'bedroom, kitchen, furniture, rent, move in, appliance' },
+      { name: 'Comida y bebida', detail: 'restaurant, menu, ingredients, meal, recipe, taste' },
+      { name: 'Ropa y compras', detail: 'size, price, receipt, try on, sale, fitting room' },
+      { name: 'Trabajo y profesiones', detail: 'office, salary, interview, manager, colleague, CV' },
+      { name: 'Viajes y transporte', detail: 'airport, ticket, platform, delay, passport, boarding' },
+      { name: 'Tiempo libre y deportes', detail: 'hobby, match, team, practice, score, tournament' },
+      { name: 'Salud y cuerpo', detail: 'headache, doctor, medicine, appointment, symptom' },
+      { name: 'Educación', detail: 'lesson, exam, degree, subject, homework, university' },
+      { name: 'Clima y naturaleza', detail: 'sunny, storm, temperature, season, forecast, flood' },
+      { name: 'Tecnología y comunicación', detail: 'email, message, laptop, social media, app, download' },
+      { name: 'Ciudad y lugares', detail: 'museum, library, supermarket, corner, neighbourhood' },
+      { name: 'Números, fechas y hora', detail: 'ordinal numbers, dates, schedules, timetables' },
+      { name: 'Descripción de personas', detail: 'appearance, personality, age, height, character' },
+      { name: 'Entretenimiento y medios', detail: 'film, concert, magazine, review, channel, series' },
+      { name: 'Dinero y finanzas básicas', detail: 'cost, pay, save, afford, change, bill, receipt' },
+    ]
+  },
+  {
+    id: 'reading',
+    label: 'Reading',
+    icon: '👁',
+    desc: 'Comprensión lectora — vale 50% del examen total (junto con Writing).',
+    topics: [
+      { name: 'Part 1 — Textos cortos del mundo real', detail: 'Carteles, mensajes, emails breves, anuncios. Identificar la idea principal.' },
+      { name: 'Part 2 — Opciones múltiples', detail: 'Texto más largo con 5 preguntas de opción múltiple (A/B/C).' },
+      { name: 'Part 3 — Completar oraciones', detail: 'Texto con frases para completar eligiendo la opción correcta entre opciones dadas.' },
+      { name: 'Part 4 — Verdadero / Falso / No dice', detail: 'Preguntas basadas en un artículo — distinguir entre "falso" y "no dice".' },
+      { name: 'Part 5 — Completar texto con palabras', detail: 'Texto con espacios en blanco — elegir la palabra gramaticalmente correcta.' },
+    ]
+  },
+  {
+    id: 'writing',
+    label: 'Writing',
+    icon: '✍️',
+    desc: 'Escritura — incluido en el mismo papel que Reading (50% total).',
+    topics: [
+      { name: 'Part 6 — Email o nota corta', detail: 'Escribir ~25 palabras respondiendo a un email/nota de un amigo o vecino.' },
+      { name: 'Part 7 — Historia corta con fotos', detail: 'Escribir ~35 palabras de una historia basándose en 3 imágenes dadas.' },
+    ]
+  },
+  {
+    id: 'listening',
+    label: 'Listening',
+    icon: '👂',
+    desc: 'Comprensión auditiva — vale 25% del examen total.',
+    topics: [
+      { name: 'Part 1 — Conversaciones cortas + imágenes', detail: 'Escuchar 5 diálogos breves y elegir la imagen correcta (A/B/C).' },
+      { name: 'Part 2 — Completar formulario', detail: 'Escuchar un monólogo y completar información en una tabla o ficha.' },
+      { name: 'Part 3 — Opciones múltiples en diálogo', detail: 'Responder 5 preguntas de opción múltiple basadas en una conversación larga.' },
+      { name: 'Part 4 — Verdadero / Falso en diálogo', detail: '5 afirmaciones para marcar como verdaderas o falsas según una conversación.' },
+      { name: 'Part 5 — Relacionar personas con opciones', detail: 'Relacionar 5 personas o situaciones con opciones de una lista de 8.' },
+    ]
+  },
+  {
+    id: 'speaking',
+    label: 'Speaking',
+    icon: '🗣',
+    desc: 'Expresión oral — presencial con examinador, vale 25% del examen total.',
+    topics: [
+      { name: 'Part 1 — Preguntas personales', detail: 'El examinador pregunta sobre vos: nombre, trabajo, familia, gustos, rutinas diarias.' },
+      { name: 'Part 2 — Descripción y comparación de fotos', detail: 'Describir y comparar dos fotos. Hablar ~1-2 minutos con el otro candidato.' },
+    ]
+  }
+];
+
+const STORAGE_KEY = 'cambridge_a2_progress';
+
+function loadState() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  } catch(e) { return {}; }
+}
+
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+let state = loadState();
+let activeSection = SECTIONS[0].id;
+
+function getProgress(sectionId) {
+  const sec = SECTIONS.find(s => s.id === sectionId);
+  const done = (state[sectionId] || []).length;
+  return { done, total: sec.topics.length, pct: Math.round(done / sec.topics.length * 100) };
+}
+
+function getTotalProgress() {
+  let done = 0, total = 0;
+  SECTIONS.forEach(s => {
+    const p = getProgress(s.id);
+    done += p.done; total += p.total;
+  });
+  return Math.round(done / total * 100);
+}
+
+function isDone(sectionId, i) {
+  return (state[sectionId] || []).includes(i);
+}
+
+function toggleTopic(sectionId, i) {
+  if (!state[sectionId]) state[sectionId] = [];
+  const idx = state[sectionId].indexOf(i);
+  if (idx === -1) state[sectionId].push(i);
+  else state[sectionId].splice(idx, 1);
+  saveState(state);
+  render();
+}
+
+function resetSection(sectionId) {
+  if (confirm('¿Resetear todos los temas de esta sección?')) {
+    state[sectionId] = [];
+    saveState(state);
+    render();
+  }
+}
+
+function showTab(id) {
+  activeSection = id;
+  render();
+}
+
+function render() {
+  renderTabs();
+  renderMain();
+  renderGlobal();
+}
+
+function renderTabs() {
+  const row = document.getElementById('tabsRow');
+  row.innerHTML = '';
+  SECTIONS.forEach(sec => {
+    const p = getProgress(sec.id);
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (activeSection === sec.id ? ' active' : '');
+    btn.innerHTML = `<span>${sec.icon} ${sec.label}</span><span class="tab-count">${p.done}/${p.total}</span>`;
+    btn.onclick = () => showTab(sec.id);
+    row.appendChild(btn);
+  });
+}
+
+function renderMain() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  SECTIONS.forEach(sec => {
+    const p = getProgress(sec.id);
+    const div = document.createElement('div');
+    div.className = 'section' + (activeSection === sec.id ? ' active' : '');
+    div.id = 'sec-' + sec.id;
+
+    const banner = p.done === p.total
+      ? `<div class="completed-banner" style="display:flex">🎉 ¡Completaste todos los temas de esta sección!</div>`
+      : '';
+
+    div.innerHTML = `
+      <div class="section-header">
+        <div class="section-title">${sec.icon} ${sec.label}</div>
+        <div class="section-desc">${sec.desc}</div>
+        ${banner}
+        <div class="section-progress-wrap">
+          <div class="sec-bar-bg"><div class="sec-bar${p.done===p.total?' complete':''}" style="width:${p.pct}%"></div></div>
+          <div class="sec-label">${p.done} de ${p.total} completados</div>
+        </div>
+      </div>
+      <div class="topics-list" id="tl-${sec.id}"></div>
+      <button class="reset-btn" onclick="resetSection('${sec.id}')">↺ Resetear sección</button>
+    `;
+    main.appendChild(div);
+
+    const list = div.querySelector('#tl-' + sec.id);
+    sec.topics.forEach((t, i) => {
+      const d = document.createElement('div');
+      d.className = 'topic' + (isDone(sec.id, i) ? ' done' : '');
+      d.innerHTML = `<div class="check">${isDone(sec.id, i) ? '✓' : ''}</div><div class="topic-body"><div class="topic-name">${t.name}</div><div class="topic-detail">${t.detail}</div></div>`;
+      d.onclick = () => toggleTopic(sec.id, i);
+      list.appendChild(d);
+    });
+  });
+}
+
+function renderGlobal() {
+  const pct = getTotalProgress();
+  document.getElementById('globalBar').style.width = pct + '%';
+  document.getElementById('globalLabel').textContent = pct + '%';
+}
+
+render();
+</script>
+</body>
+</html>
