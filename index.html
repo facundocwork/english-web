@@ -127,9 +127,44 @@
 
   aside {
     width: 230px; min-width: 230px; border-right: 1px solid var(--border);
-    background: var(--bg2); padding: 16px 12px; overflow-y: auto;
-    position: sticky; top: 110px; height: calc(100vh - 110px);
+    background: var(--bg2); padding: 16px 12px;
   }
+
+  /* Toolbar for rich text editing */
+  .toolbar {
+    display: flex; gap: 4px; margin-bottom: 4px;
+  }
+  .toolbar button {
+    background: var(--bg2); color: var(--text); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2px 6px; cursor: pointer;
+    font-size: 12px;
+  }
+  .toolbar button:hover {
+  background: var(--accent-light); color: var(--accent);
+}
+
+/* Dark‑mode styling for the font‑size select inside the toolbar */
+.toolbar select {
+  background: var(--bg2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2px 4px;
+  font-size: 12px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.toolbar select option {
+  background: var(--bg2);
+  color: var(--text);
+}
+
+  .rich-editor {
+    min-height: 80px; border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--bg); color: var(--text); padding: 6px 8px; font-family: var(--font); font-size: 14px;
+    overflow-y: auto;
+  }
+  .rich-editor:focus { outline: none; border-color: var(--accent); }
 
   .new-btn {
     display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -561,46 +596,102 @@ function renderNoteView() {
       </div>
     </div>
     <hr class="divider">
-    <div class="tblock">
-      <h3>📖 ¿Qué es? — Explicación</h3>
-      <textarea class="field tall" placeholder="Explicá el tema con tus propias palabras. ¿Para qué se usa? ¿Cuándo se aplica?"
-        onchange="updateField('${note.id}','explicacion',this.value)">${escHtml(note.explicacion)}</textarea>
-    </div>
-    <div class="tblock">
-      <h3>🔧 Estructura / Regla</h3>
-      <textarea class="field" placeholder="Ej: Sujeto + verbo + complemento  /  She works every day."
-        onchange="updateField('${note.id}','estructura',this.value)">${escHtml(note.estructura)}</textarea>
-    </div>
-    <div class="tblock">
-      <h3>💬 Ejemplos</h3>
-      <div class="eg-grid">
-        <div class="eg-box">
-          <div class="eg-label">✅ Correcto</div>
-          <textarea class="field tall" placeholder="She works at a hospital.&#10;They are studying English."
-            onchange="updateField('${note.id}','ejemplo_correcto',this.value)">${escHtml(note.ejemplo_correcto)}</textarea>
+        <div class="tblock">
+          <h3>📖 ¿Qué es? — Explicación</h3>
+          <div class="toolbar">
+            <button onclick="formatCmd('bold')"><b>B</b></button>
+            <button onclick="formatCmd('italic')"><i>I</i></button>
+            <button onclick="formatCmd('underline')"><u>U</u></button>
+            <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+            <select onchange="formatCmd('fontSize', this.value)">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+            </select>
+          </div>
+          <div class="rich-editor" contenteditable="true" data-field="explicacion" oninput="richInput(this)" >${note.explicacion}</div>
         </div>
-        <div class="eg-box">
-          <div class="eg-label">❌ Errores comunes</div>
-          <textarea class="field tall" placeholder="She work at a hospital.&#10;They is studying English."
-            onchange="updateField('${note.id}','ejemplo_incorrecto',this.value)">${escHtml(note.ejemplo_incorrecto)}</textarea>
+        <div class="tblock">
+          <h3>🔧 Estructura / Regla</h3>
+          <div class="toolbar">
+            <button onclick="formatCmd('bold')"><b>B</b></button>
+            <button onclick="formatCmd('italic')"><i>I</i></button>
+            <button onclick="formatCmd('underline')"><u>U</u></button>
+            <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+            <select onchange="formatCmd('fontSize', this.value)">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+            </select>
+          </div>
+          <div class="rich-editor" contenteditable="true" data-field="estructura" oninput="richInput(this)" >${note.estructura}</div>
         </div>
-      </div>
-    </div>
-    <div class="tblock">
-      <h3>📝 Vocabulario relacionado</h3>
-      <textarea class="field" placeholder="always, usually, sometimes, never, every day, on weekdays..."
-        onchange="updateField('${note.id}','vocabulario',this.value)">${escHtml(note.vocabulario)}</textarea>
-    </div>
-    <div class="tblock">
-      <h3>⚠️ Mis errores frecuentes</h3>
-      <textarea class="field short" placeholder="Anotá los errores que cometés seguido para no repetirlos."
-        onchange="updateField('${note.id}','errores',this.value)">${escHtml(note.errores)}</textarea>
-    </div>
-    <div class="tblock">
-      <h3>💡 Notas extra / Trucos para recordar</h3>
-      <textarea class="field short" placeholder="Excepciones, comparaciones con el español, trucos mnemotécnicos..."
-        onchange="updateField('${note.id}','notas',this.value)">${escHtml(note.notas)}</textarea>
-    </div>
+        <div class="tblock">
+          <h3>💬 Ejemplos</h3>
+          <div class="eg-grid">
+            <div class="eg-box">
+              <div class="eg-label">✅ Correcto</div>
+              <div class="toolbar">
+                <button onclick="formatCmd('bold')"><b>B</b></button>
+                <button onclick="formatCmd('italic')"><i>I</i></button>
+                <button onclick="formatCmd('underline')"><u>U</u></button>
+                <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+                <select onchange="formatCmd('fontSize', this.value)">
+                  <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+                </select>
+              </div>
+              <div class="rich-editor" contenteditable="true" data-field="ejemplo_correcto" oninput="richInput(this)" >${note.ejemplo_correcto}</div>
+            </div>
+            <div class="eg-box">
+              <div class="eg-label">❌ Errores comunes</div>
+              <div class="toolbar">
+                <button onclick="formatCmd('bold')"><b>B</b></button>
+                <button onclick="formatCmd('italic')"><i>I</i></button>
+                <button onclick="formatCmd('underline')"><u>U</u></button>
+                <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+                <select onchange="formatCmd('fontSize', this.value)">
+                  <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+                </select>
+              </div>
+              <div class="rich-editor" contenteditable="true" data-field="ejemplo_incorrecto" oninput="richInput(this)" >${note.ejemplo_incorrecto}</div>
+            </div>
+          </div>
+        </div>
+        <div class="tblock">
+          <h3>📝 Vocabulario relacionado</h3>
+          <div class="toolbar">
+            <button onclick="formatCmd('bold')"><b>B</b></button>
+            <button onclick="formatCmd('italic')"><i>I</i></button>
+            <button onclick="formatCmd('underline')"><u>U</u></button>
+            <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+            <select onchange="formatCmd('fontSize', this.value)">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+            </select>
+          </div>
+          <div class="rich-editor" contenteditable="true" data-field="vocabulario" oninput="richInput(this)" >${note.vocabulario}</div>
+        </div>
+        <div class="tblock">
+          <h3>⚠️ Mis errores frecuentes</h3>
+          <div class="toolbar">
+            <button onclick="formatCmd('bold')"><b>B</b></button>
+            <button onclick="formatCmd('italic')"><i>I</i></button>
+            <button onclick="formatCmd('underline')"><u>U</u></button>
+            <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+            <select onchange="formatCmd('fontSize', this.value)">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+            </select>
+          </div>
+          <div class="rich-editor" contenteditable="true" data-field="errores" oninput="richInput(this)" >${note.errores}</div>
+        </div>
+        <div class="tblock">
+          <h3>💡 Notas extra / Trucos para recordar</h3>
+          <div class="toolbar">
+            <button onclick="formatCmd('bold')"><b>B</b></button>
+            <button onclick="formatCmd('italic')"><i>I</i></button>
+            <button onclick="formatCmd('underline')"><u>U</u></button>
+            <button onclick="formatCmd('foreColor', 'red')" style="color:red;">A</button>
+            <select onchange="formatCmd('fontSize', this.value)">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+            </select>
+          </div>
+          <div class="rich-editor" contenteditable="true" data-field="notas" oninput="richInput(this)" >${note.notas}</div>
+        </div>
     <div class="act-row">
       <button class="btn btn-del" onclick="deleteNote('${note.id}')">🗑 Borrar apunte</button>
     </div>
@@ -608,6 +699,20 @@ function renderNoteView() {
 }
 
 function renderApuntes() { renderNoteList(); renderNoteView(); }
+
+// Function to apply formatting commands
+function formatCmd(cmd, value=null) {
+  document.execCommand(cmd, false, value);
+}
+
+// Handler for rich editor input to sync with note data
+function richInput(el) {
+  const field = el.getAttribute('data-field');
+  const id = activeNoteId;
+  if (!field || !id) return;
+  // Use innerHTML to preserve formatting tags
+  updateField(id, field, el.innerHTML);
+}
 
 function esc(s) { return (s||'').replace(/'/g,"\\'"); }
 function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
